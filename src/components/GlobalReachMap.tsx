@@ -1,0 +1,272 @@
+'use client';
+
+import { useState } from 'react';
+import { motion } from 'framer-motion';
+import { Globe2, Navigation, Ship, Anchor } from 'lucide-react';
+
+interface ExportCountry {
+  name: string;
+  coords: { x: number; y: number }; // SVG canvas relative coordinates
+  shippingDays: string;
+  keyProduct: string;
+  transport: string;
+}
+
+const exportDestinations: ExportCountry[] = [
+  {
+    name: 'India (Manufacturing Origin)',
+    coords: { x: 580, y: 310 },
+    shippingDays: 'Domestic Hub',
+    keyProduct: 'All Products',
+    transport: 'Road & Rail Freight',
+  },
+  {
+    name: 'UAE',
+    coords: { x: 480, y: 290 },
+    shippingDays: '4-6 Days',
+    keyProduct: 'Press-Fit Spouts',
+    transport: 'Sea Container (Jebel Ali)',
+  },
+  {
+    name: 'Saudi Arabia',
+    coords: { x: 440, y: 305 },
+    shippingDays: '6-8 Days',
+    keyProduct: 'Rigid Screw Caps',
+    transport: 'Sea Container (Jeddah)',
+  },
+  {
+    name: 'Italy',
+    coords: { x: 340, y: 200 },
+    shippingDays: '16-18 Days',
+    keyProduct: 'Spout Caps & Handles',
+    transport: 'Sea Container (Genoa)',
+  },
+  {
+    name: 'Germany',
+    coords: { x: 320, y: 165 },
+    shippingDays: '18-20 Days',
+    keyProduct: 'Custom Closures',
+    transport: 'Sea Container (Hamburg)',
+  },
+  {
+    name: 'United Kingdom',
+    coords: { x: 260, y: 150 },
+    shippingDays: '16-19 Days',
+    keyProduct: 'Flip-Top Closures',
+    transport: 'Sea Container (Felixstowe)',
+  },
+  {
+    name: 'Sri Lanka',
+    coords: { x: 595, y: 375 },
+    shippingDays: '3-4 Days',
+    keyProduct: 'Food Grade Caps',
+    transport: 'Sea Container (Colombo)',
+  },
+  {
+    name: 'Canada',
+    coords: { x: 120, y: 130 },
+    shippingDays: '22-25 Days',
+    keyProduct: 'Tamper Evident Closures',
+    transport: 'Sea Container (Vancouver)',
+  },
+  {
+    name: 'USA',
+    coords: { x: 90, y: 190 },
+    shippingDays: '20-24 Days',
+    keyProduct: 'Spout & Flip-Top Caps',
+    transport: 'Sea Container (New York / LA)',
+  },
+];
+
+export default function GlobalReachMap() {
+  const [hoveredCountry, setHoveredCountry] = useState<ExportCountry | null>(null);
+
+  const origin = exportDestinations[0].coords; // India
+
+  return (
+    <section id="global-reach" className="py-20 lg:py-28 bg-slate-900 text-white relative overflow-hidden z-10">
+      {/* Background visual details */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(15,23,42,0.9),rgba(9,14,26,1))]" />
+      
+      {/* Radar rings */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-slate-800/40 rounded-full pointer-events-none -z-10 animate-pulse" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-slate-800/20 rounded-full pointer-events-none -z-10" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        
+        {/* Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-blue/10 text-accent-blue text-xs font-semibold uppercase tracking-wider">
+            <Globe2 className="w-4 h-4 text-primary-green" />
+            Global Export Footprint
+          </div>
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
+            Connecting Rajkot to Global Markets
+          </h2>
+          <p className="text-slate-400 font-light max-w-xl mx-auto text-sm">
+            Leveraging efficient maritime and land routes to deliver high-volume packaging supplies on schedule across major continents.
+          </p>
+        </div>
+
+        {/* Map Container */}
+        <div className="glass-card bg-slate-950/70 border-slate-800/80 rounded-3xl p-6 lg:p-8 shadow-2xl relative overflow-x-auto min-w-[700px] md:min-w-0">
+          
+          {/* Legend indicator */}
+          <div className="absolute top-6 left-6 z-20 flex items-center gap-6 text-xs text-slate-400 bg-slate-900/80 backdrop-blur-md px-4 py-2.5 rounded-xl border border-slate-800">
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-primary-green animate-ping shrink-0" />
+              <span>Rajkot Origin</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="w-2.5 h-2.5 rounded-full bg-primary-blue shrink-0" />
+              <span>Export Markets</span>
+            </div>
+          </div>
+
+          {/* SVG Map Canvas */}
+          <svg
+            viewBox="0 0 800 450"
+            className="w-full h-auto text-slate-800"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            {/* Dotted Stylized Continental Grid for futuristic dashboard look */}
+            <g opacity="0.15">
+              {/* North America Dotted representation */}
+              <circle cx="90" cy="180" r="40" fill="currentColor" />
+              <circle cx="120" cy="140" r="50" fill="currentColor" />
+              <circle cx="150" cy="120" r="30" fill="currentColor" />
+              {/* Europe Dotted */}
+              <circle cx="310" cy="160" r="35" fill="currentColor" />
+              <circle cx="340" cy="200" r="30" fill="currentColor" />
+              {/* Middle East Dotted */}
+              <circle cx="450" cy="280" r="25" fill="currentColor" />
+              {/* India/Asia Dotted */}
+              <circle cx="580" cy="310" r="45" fill="currentColor" />
+              <circle cx="610" cy="330" r="35" fill="currentColor" />
+              <circle cx="650" cy="280" r="60" fill="currentColor" />
+            </g>
+
+            {/* Export Shipping Arc Paths */}
+            {exportDestinations.map((country, idx) => {
+              if (idx === 0) return null; // Skip India to India path
+              
+              // Calculate curved path coordinates for nice arching curves
+              const dx = country.coords.x - origin.x;
+              const dy = country.coords.y - origin.y;
+              const dr = Math.sqrt(dx * dx + dy * dy) * 1.25; // curvature control
+
+              return (
+                <g key={`path-${country.name}`}>
+                  {/* Glowing background path */}
+                  <path
+                    d={`M${origin.x},${origin.y} A${dr},${dr} 0 0,1 ${country.coords.x},${country.coords.y}`}
+                    fill="none"
+                    stroke="#40A4D6"
+                    strokeWidth="1.5"
+                    strokeOpacity="0.15"
+                  />
+                  {/* Flow Animation Stroke path */}
+                  <motion.path
+                    d={`M${origin.x},${origin.y} A${dr},${dr} 0 0,1 ${country.coords.x},${country.coords.y}`}
+                    fill="none"
+                    stroke="url(#arc-gradient)"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    initial={{ strokeDasharray: '0, 1000' }}
+                    animate={{ strokeDasharray: '20, 200' }}
+                    transition={{
+                      repeat: Infinity,
+                      duration: 4 + Math.random() * 3,
+                      ease: 'linear',
+                    }}
+                  />
+                </g>
+              );
+            })}
+
+            {/* Country node markers */}
+            {exportDestinations.map((country, idx) => {
+              const isOrigin = idx === 0;
+              const isHovered = hoveredCountry?.name === country.name;
+              
+              return (
+                <g
+                  key={`node-${country.name}`}
+                  className="cursor-pointer"
+                  onMouseEnter={() => setHoveredCountry(country)}
+                  onMouseLeave={() => setHoveredCountry(null)}
+                >
+                  {/* Glow Ring under node */}
+                  <circle
+                    cx={country.coords.x}
+                    cy={country.coords.y}
+                    r={isOrigin ? 12 : 8}
+                    fill={isOrigin ? '#6EC482' : '#40A4D6'}
+                    fillOpacity="0.2"
+                    className={isOrigin || isHovered ? 'animate-ping' : ''}
+                  />
+                  {/* Center Node Core */}
+                  <circle
+                    cx={country.coords.x}
+                    cy={country.coords.y}
+                    r={isOrigin ? 6 : 4}
+                    fill={isOrigin ? '#6EC482' : '#40A4D6'}
+                    className="transition-all duration-300 group-hover:scale-125"
+                  />
+                </g>
+              );
+            })}
+
+            {/* Definitions for Gradients */}
+            <defs>
+              <linearGradient id="arc-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stopColor="#6EC482" stopOpacity="0.1" />
+                <stop offset="50%" stopColor="#40A4D6" stopOpacity="1" />
+                <stop offset="100%" stopColor="#6EC482" stopOpacity="0.1" />
+              </linearGradient>
+            </defs>
+          </svg>
+
+          {/* Interactive Tooltip Card overlay */}
+          <div className="min-h-[100px] bg-slate-900 border border-slate-800/80 rounded-2xl p-5 mt-6 grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+            {hoveredCountry ? (
+              <>
+                <div className="md:col-span-1">
+                  <span className="block text-slate-500 text-[10px] font-bold uppercase tracking-wider">Target Destination</span>
+                  <span className="text-base font-extrabold text-white">{hoveredCountry.name}</span>
+                </div>
+                <div className="md:col-span-1 flex items-center gap-2">
+                  <Ship className="w-5 h-5 text-primary-blue shrink-0" />
+                  <div>
+                    <span className="block text-slate-500 text-[10px] font-bold uppercase tracking-wider">Logistics Transmit</span>
+                    <span className="text-xs font-semibold text-slate-200">{hoveredCountry.shippingDays}</span>
+                  </div>
+                </div>
+                <div className="md:col-span-1 flex items-center gap-2">
+                  <Navigation className="w-5 h-5 text-primary-green shrink-0" />
+                  <div>
+                    <span className="block text-slate-500 text-[10px] font-bold uppercase tracking-wider">Key Export Cap</span>
+                    <span className="text-xs font-semibold text-slate-200">{hoveredCountry.keyProduct}</span>
+                  </div>
+                </div>
+                <div className="md:col-span-1 flex items-center gap-2">
+                  <Anchor className="w-5 h-5 text-primary-blue shrink-0" />
+                  <div>
+                    <span className="block text-slate-500 text-[10px] font-bold uppercase tracking-wider">Shipping Method</span>
+                    <span className="text-xs font-semibold text-slate-200">{hoveredCountry.transport}</span>
+                  </div>
+                </div>
+              </>
+            ) : (
+              <div className="md:col-span-4 text-center py-4 text-slate-500 text-xs font-medium tracking-wide">
+                Hover over the map nodes to inspect export times, shipping methods, and product distributions.
+              </div>
+            )}
+          </div>
+          
+        </div>
+
+      </div>
+    </section>
+  );
+}

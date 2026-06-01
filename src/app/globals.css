@@ -1,0 +1,129 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-blue: #40A4D6;
+  --color-accent-blue: #70C5E8;
+  --color-primary-green: #6EC482;
+  --color-accent-green: #9CE0B0;
+  
+  --color-text-dark: #1E2D3B;
+  --color-text-light: #5A6A7A;
+  --color-bg-light: #F2F9FA;
+  
+  --font-sans: var(--font-body), sans-serif;
+  --font-heading: var(--font-heading), sans-serif;
+  
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-spin-slow: spin 20s linear infinite;
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(3deg); }
+  }
+}
+
+:root {
+  --background: #FFFFFF;
+  --foreground: #1E2D3B;
+  --font-heading: 'Outfit';
+  --font-body: 'Inter';
+  
+  --color-text-dark: #1E2D3B;
+  --color-text-light: #5A6A7A;
+  --color-bg-light: #F2F9FA;
+}
+
+.dark {
+  --background: #090E1A;
+  --foreground: #E2E8F0;
+  
+  --color-text-dark: #FFFFFF;
+  --color-text-light: #94A3B8;
+  --color-bg-light: #151F32;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Glassmorphism Classes */
+.glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(64, 164, 214, 0.12);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.dark .glass-card {
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(110, 196, 130, 0.1);
+}
+
+.glass-nav {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(64, 164, 214, 0.08);
+}
+
+.dark .glass-nav {
+  background: rgba(9, 14, 26, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(110, 196, 130, 0.08);
+}
+
+/* Cap Background Pattern Overlay */
+.bg-caps-pattern {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -10;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 20 C25 20, 15 25, 15 30 L15 50 C15 55, 25 60, 40 60 C55 60, 65 55, 65 50 L65 30 C65 25, 55 20, 40 20 Z M40 24 C50 24, 58 26, 61 29 C58 32, 50 34, 40 34 C30 34, 22 32, 19 29 C22 26, 30 24, 40 24 Z' fill='%2340A4D6' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 120px;
+}
+
+.dark .bg-caps-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M40 20 C25 20, 15 25, 15 30 L15 50 C15 55, 25 60, 40 60 C55 60, 65 55, 65 50 L65 30 C65 25, 55 20, 40 20 Z M40 24 C50 24, 58 26, 61 29 C58 32, 50 34, 40 34 C30 34, 22 32, 19 29 C22 26, 30 24, 40 24 Z' fill='%236EC482' fill-opacity='0.02' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+/* Custom scrollbar styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #40A4D633;
+  border-radius: 5px;
+  border: 2px solid var(--background);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #6EC48222;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #40A4D677;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #6EC48255;
+}
