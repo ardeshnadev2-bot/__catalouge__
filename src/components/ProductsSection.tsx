@@ -423,34 +423,15 @@ export default function ProductsSection() {
             </p>
           </div>
 
-          {/* Interactive Feature Showcase & Image */}
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Image Column */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="lg:col-span-5 group relative rounded-3xl overflow-hidden glass-card p-4 border border-slate-200 dark:border-slate-800 shadow-xl"
-            >
-              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-slate-100 dark:bg-slate-950/40">
-                <Image
-                  src="/images/packaging_range.png"
-                  alt="SV Closures Custom Packaging Solutions"
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent pointer-events-none" />
-              </div>
-            </motion.div>
-
+          {/* Interactive Feature Showcase */}
+          <div className="max-w-4xl mx-auto">
             {/* Content Column */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              className="lg:col-span-7 space-y-8"
+              transition={{ duration: 0.6 }}
+              className="space-y-8"
             >
               {/* Core Features list */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
@@ -522,7 +503,7 @@ export default function ProductsSection() {
               </div>
 
               {/* Call to Action Button */}
-              <div className="flex items-center gap-4">
+              <div className="flex items-center justify-center gap-4">
                 <button
                   onClick={() => handleEnquire('Custom Packaging Systems')}
                   className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-primary-blue to-primary-green text-white text-sm font-semibold shadow-lg shadow-primary-blue/15 hover:shadow-xl transition-all duration-300 group"
