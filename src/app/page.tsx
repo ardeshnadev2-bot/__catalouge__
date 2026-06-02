@@ -1,5 +1,6 @@
 import { Navbar } from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
+import ClienteleSection from '@/components/ClienteleSection';
 import AboutSection from '@/components/AboutSection';
 import IndustriesSection from '@/components/IndustriesSection';
 import ProductsSection from '@/components/ProductsSection';
@@ -23,6 +24,9 @@ export default function Home() {
       <main className="flex-grow">
         {/* 1. Hero Section & Statistics */}
         <HeroSection />
+
+        {/* Clientele Showcase */}
+        <ClienteleSection />
 
         {/* 2. Legacy Introduction & Key Industrial Advantages */}
         <AboutSection />
