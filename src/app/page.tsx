@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Navbar } from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import ClienteleSection from '@/components/ClienteleSection';
+import ProductRanges from '@/components/ProductRanges';
 import AboutSection from '@/components/AboutSection';
 import IndustriesSection from '@/components/IndustriesSection';
 import ProductsSection from '@/components/ProductsSection';
@@ -103,6 +104,7 @@ export default function Home() {
             >
               <HeroSection />
               <ClienteleSection />
+              <ProductRanges />
               <GlobalReachMap />
               <ProductsSection />
               <AboutSection />
@@ -126,6 +128,7 @@ export default function Home() {
             >
               <HeroSection />
               <ClienteleSection />
+              <ProductRanges />
             </motion.div>
           )}
 
