@@ -533,6 +533,62 @@ export default function ProductsSection() {
               </div>
             </motion.div>
           </div>
+
+          {/* Horizontal Packaging Images */}
+          <div className="mt-16 pt-16 border-t border-slate-100 dark:border-slate-800/60 space-y-8">
+            <div className="text-center max-w-2xl mx-auto space-y-2">
+              <h4 className="text-2xl font-bold uppercase tracking-wider text-text-dark dark:text-white">
+                OUR <span className="bg-gradient-to-r from-primary-blue to-primary-green bg-clip-text text-transparent">PACKAGING</span>
+              </h4>
+              <p className="text-xs text-text-light dark:text-slate-400 font-light">
+                Heavy-duty palletized carton packaging and container logistics optimized for transcontinental shipping.
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                {
+                  src: '/images/packaging_container.png',
+                  alt: 'Palletized cartons loaded in a shipping container',
+                  caption: 'Containerized Export Logistics'
+                },
+                {
+                  src: '/images/packaging_pallet.png',
+                  alt: 'Shrink-wrapped pallet of cartons',
+                  caption: 'Palletized & Shrink-Wrapped Protection'
+                },
+                {
+                  src: '/images/packaging_warehouse.png',
+                  alt: 'Multiple stacks of cartons in warehouse',
+                  caption: 'High-Volume Ready Inventory'
+                }
+              ].map((img, index) => (
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.15, duration: 0.5 }}
+                  className="group relative flex flex-col bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden p-3 shadow-md hover:shadow-xl transition-all duration-300"
+                >
+                  <div className="relative aspect-[4/3] w-full overflow-hidden rounded-xl bg-slate-50 dark:bg-slate-950/20">
+                    <Image
+                      src={img.src}
+                      alt={img.alt}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                    />
+                  </div>
+                  <div className="mt-3 text-center">
+                    <p className="text-xs font-semibold text-text-dark dark:text-slate-200">
+                      {img.caption}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
 
       </div>
