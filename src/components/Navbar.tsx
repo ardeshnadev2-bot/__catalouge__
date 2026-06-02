@@ -47,6 +47,26 @@ export function Navbar() {
       }
     };
 
+    // Scroll to hash on page load (e.g. from shared link)
+    const initialHash = window.location.hash;
+    if (initialHash) {
+      setTimeout(() => {
+        const targetId = initialHash.replace('#', '');
+        const element = document.getElementById(targetId);
+        if (element) {
+          const offset = 80;
+          const bodyRect = document.body.getBoundingClientRect().top;
+          const elementRect = element.getBoundingClientRect().top;
+          const elementPosition = elementRect - bodyRect;
+          const offsetPosition = elementPosition - offset;
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth',
+          });
+        }
+      }, 600);
+    }
+
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
@@ -67,6 +87,9 @@ export function Navbar() {
         top: offsetPosition,
         behavior: 'smooth',
       });
+
+      // Update URL hash
+      window.history.pushState(null, '', href);
     }
   };
 

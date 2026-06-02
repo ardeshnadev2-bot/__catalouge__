@@ -170,6 +170,9 @@ export default function ProductsSection() {
         top: offsetPosition,
         behavior: 'smooth',
       });
+
+      // Update URL hash
+      window.history.pushState(null, '', '#contact');
     }
   };
 
