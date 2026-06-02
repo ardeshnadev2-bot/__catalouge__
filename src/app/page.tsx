@@ -16,9 +16,6 @@ import { WhatsAppButton } from '@/components/WhatsAppButton';
 export default function Home() {
   return (
     <>
-      {/* Background Subtle Bottle Cap Pattern Overlay */}
-      <div className="bg-caps-pattern" />
-
       {/* Global Navigation Bar */}
       <Navbar />
 
