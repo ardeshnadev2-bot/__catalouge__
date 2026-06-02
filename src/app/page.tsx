@@ -129,6 +129,8 @@ export default function Home() {
               <HeroSection />
               <ClienteleSection />
               <ProductRanges />
+              <Testimonials />
+              <Certifications />
             </motion.div>
           )}
 
