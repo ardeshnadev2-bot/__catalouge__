@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, MessageSquare, ShieldCheck } from 'lucide-react';
+import { Download, MessageSquare, ShieldCheck, Package, Cpu, ArrowRight, Settings, CheckCircle2, Paintbrush } from 'lucide-react';
 
 interface Product {
   id: string;
@@ -523,6 +523,136 @@ export default function ProductsSection() {
             ))}
           </AnimatePresence>
         </motion.div>
+
+        {/* Decorative Divider */}
+        <div className="my-20 h-px w-full bg-gradient-to-r from-transparent via-slate-200 dark:via-slate-800 to-transparent" />
+
+        {/* Our Packaging Subsection */}
+        <div id="packaging" className="space-y-12">
+          {/* Header */}
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <span className="text-xs font-bold uppercase tracking-widest bg-gradient-to-r from-primary-blue to-primary-green bg-clip-text text-transparent">
+              Complete Container Systems
+            </span>
+            <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-text-dark dark:text-white">
+              Custom Packaging Solutions
+            </h3>
+            <p className="text-text-light dark:text-slate-400 font-light max-w-2xl mx-auto text-sm sm:text-base">
+              Beyond world-class closures, we design and manufacture high-performance plastic container systems. Achieve 100% leak-proof pairing by sourcing your custom bottles, jars, and jerry cans directly from our production lines.
+            </p>
+          </div>
+
+          {/* Interactive Feature Showcase & Image */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            {/* Image Column */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="lg:col-span-5 group relative rounded-3xl overflow-hidden glass-card p-4 border border-slate-200 dark:border-slate-800 shadow-xl"
+            >
+              <div className="relative aspect-[4/3] w-full overflow-hidden rounded-2xl bg-slate-100 dark:bg-slate-950/40">
+                <Image
+                  src="/images/packaging_range.png"
+                  alt="SV Closures Custom Packaging Solutions"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent pointer-events-none" />
+              </div>
+            </motion.div>
+
+            {/* Content Column */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, delay: 0.1 }}
+              className="lg:col-span-7 space-y-8"
+            >
+              {/* Core Features list */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-primary-blue dark:text-primary-green">
+                    <Package className="w-5 h-5" />
+                    <h4 className="font-bold text-sm text-text-dark dark:text-white">Custom Bottle & Jar Molding</h4>
+                  </div>
+                  <p className="text-xs text-text-light dark:text-slate-400 font-light leading-relaxed">
+                    Custom shapes, sizes, and neck finishes ranging from 100ml to 50L. Developed using state-of-the-art Extrusion and Injection Blow Molding.
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-primary-blue dark:text-primary-green">
+                    <Cpu className="w-5 h-5" />
+                    <h4 className="font-bold text-sm text-text-dark dark:text-white">CAD & Prototype Testing</h4>
+                  </div>
+                  <p className="text-xs text-text-light dark:text-slate-400 font-light leading-relaxed">
+                    Full computational stress analysis and rapid 3D prototyping. We verify seal integrity, vertical load resistance, and environmental stress cracking.
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-primary-blue dark:text-primary-green">
+                    <Settings className="w-5 h-5" />
+                    <h4 className="font-bold text-sm text-text-dark dark:text-white">Turnkey System Matching</h4>
+                  </div>
+                  <p className="text-xs text-text-light dark:text-slate-400 font-light leading-relaxed">
+                    Eliminate compatibility risks. We engineer both the container and closure as a single integrated packaging unit to guarantee zero-leak logistics.
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  <div className="flex items-center gap-2 text-primary-blue dark:text-primary-green">
+                    <Paintbrush className="w-5 h-5" />
+                    <h4 className="font-bold text-sm text-text-dark dark:text-white">Custom Color & Branding</h4>
+                  </div>
+                  <p className="text-xs text-text-light dark:text-slate-400 font-light leading-relaxed">
+                    In-mold logo embossing, customized color masterbatches with Pantone matching, and screen printing to make your brand stand out on the shelves.
+                  </p>
+                </div>
+              </div>
+
+              {/* Technical Specifications Table */}
+              <div className="glass-card rounded-2xl border border-slate-200 dark:border-slate-800/80 overflow-hidden text-xs">
+                <div className="bg-slate-50 dark:bg-slate-900/50 px-4 py-3 border-b border-slate-200 dark:border-slate-800 font-bold text-text-dark dark:text-white flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-primary-green" />
+                  Packaging Specifications
+                </div>
+                <div className="p-4 grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 text-text-light dark:text-slate-300">
+                  <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800/40">
+                    <span className="font-medium text-slate-400">Volume Range</span>
+                    <span className="font-semibold text-text-dark dark:text-slate-200">100 ml to 50 Litres</span>
+                  </div>
+                  <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800/40">
+                    <span className="font-medium text-slate-400">Processes</span>
+                    <span className="font-semibold text-text-dark dark:text-slate-200">IBM, EBM, ISBM</span>
+                  </div>
+                  <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800/40">
+                    <span className="font-medium text-slate-400">Compliance</span>
+                    <span className="font-semibold text-text-dark dark:text-slate-200">UN Certified, FDA Approved</span>
+                  </div>
+                  <div className="flex justify-between py-1 border-b border-slate-100 dark:border-slate-800/40">
+                    <span className="font-medium text-slate-400">Materials</span>
+                    <span className="font-semibold text-text-dark dark:text-slate-200">HDPE, PP, PET, LDPE</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Call to Action Button */}
+              <div className="flex items-center gap-4">
+                <button
+                  onClick={() => handleEnquire('Custom Packaging Systems')}
+                  className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-gradient-to-r from-primary-blue to-primary-green text-white text-sm font-semibold shadow-lg shadow-primary-blue/15 hover:shadow-xl transition-all duration-300 group"
+                >
+                  Enquire About Packaging
+                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
+                </button>
+              </div>
+            </motion.div>
+          </div>
+        </div>
 
       </div>
     </section>
