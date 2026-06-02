@@ -78,41 +78,101 @@ const exportDestinations: ExportCountry[] = [
   },
 ];
 
+const exportPhotos = [
+  {
+    src: '/images/export_shipping_1.png',
+    alt: 'Vessel carrying containers across the ocean',
+    caption: 'Ocean Transit',
+  },
+  {
+    src: '/images/export_shipping_2.png',
+    alt: 'High-volume export container stacks',
+    caption: 'Bulk Storage',
+  },
+  {
+    src: '/images/export_shipping_3.png',
+    alt: 'Precision harbor crane container loading',
+    caption: 'Port Loading',
+  },
+  {
+    src: '/images/export_shipping_4.png',
+    alt: 'Express logistics container truck',
+    caption: 'Land Freight',
+  },
+  {
+    src: '/images/export_shipping_5.png',
+    alt: 'Busy shipping terminal at sunset',
+    caption: 'Global Hubs',
+  },
+  {
+    src: '/images/export_shipping_6.png',
+    alt: 'Heavy container handler at logistics terminal',
+    caption: 'Terminal Logistics',
+  },
+];
+
 export default function GlobalReachMap() {
   const [hoveredCountry, setHoveredCountry] = useState<ExportCountry | null>(null);
 
   const origin = exportDestinations[0].coords; // India
 
   return (
-    <section id="global-reach" className="py-20 lg:py-28 bg-slate-900 text-white relative overflow-hidden z-10">
-      {/* Background visual details */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(15,23,42,0.9),rgba(9,14,26,1))]" />
+    <section id="global-reach" className="py-20 lg:py-28 bg-transparent text-slate-900 dark:text-white relative overflow-hidden z-10">
+      {/* Background visual details - theme aware */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(224,242,254,0.4),rgba(255,255,255,0.2))] dark:bg-[radial-gradient(ellipse_at_center,rgba(15,23,42,0.9),rgba(9,14,26,1))] -z-10" />
       
       {/* Radar rings */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-slate-800/40 rounded-full pointer-events-none -z-10 animate-pulse" />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-slate-800/20 rounded-full pointer-events-none -z-10" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] border border-slate-200/50 dark:border-slate-800/40 rounded-full pointer-events-none -z-10 animate-pulse" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] border border-slate-200/30 dark:border-slate-800/20 rounded-full pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-blue/10 text-accent-blue text-xs font-semibold uppercase tracking-wider">
+        <div className="text-center max-w-4xl mx-auto mb-16 space-y-6">
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-blue/10 text-primary-blue dark:text-accent-blue text-xs font-semibold uppercase tracking-wider">
             <Globe2 className="w-4 h-4 text-primary-green" />
-            Our Exports
+            Our Exports & Logistics
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
+          <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
             Connecting Rajkot to Global Markets
           </h2>
-          <p className="text-slate-400 font-light max-w-xl mx-auto text-sm">
-            Leveraging efficient maritime and land routes to deliver high-volume packaging supplies on schedule across major continents.
-          </p>
+          
+          <div className="space-y-4 max-w-3xl mx-auto">
+            <p className="text-slate-700 dark:text-slate-300 font-light text-base leading-relaxed">
+              We specialize in the high-volume export of our premium-grade plastic closures, caps, and jerrycan spouts to key markets worldwide. Our state-of-the-art products are engineered to withstand extreme climates during long-distance transit, featuring airtight sealing and durable structures.
+            </p>
+            <p className="text-slate-600 dark:text-slate-400 font-light text-sm leading-relaxed max-w-2xl mx-auto">
+              To ensure flawless delivery, we utilize heavy-duty, moisture-controlled shipping containers and partner with tier-1 international freight networks. Every export consignment is packaged using export-grade pallets with moisture-barrier wrapping, guaranteeing food-safety and industrial integrity from our factory floor directly to your warehouse.
+            </p>
+          </div>
+
+          {/* Shipping and Export Containers Photo Grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 pt-6 max-w-5xl mx-auto">
+            {exportPhotos.map((photo, index) => (
+              <motion.div
+                key={index}
+                className="relative group aspect-[4/3] sm:aspect-square rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800/80 shadow-xl bg-white dark:bg-slate-950"
+                whileHover={{ scale: 1.05, y: -4 }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+              >
+                <img
+                  src={photo.src}
+                  alt={photo.alt}
+                  className="w-full h-full object-cover grayscale-[30%] group-hover:grayscale-0 transition-all duration-500"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center p-3 text-center">
+                  <span className="text-[10px] font-bold text-white tracking-wider uppercase">{photo.caption}</span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
 
         {/* Map Container */}
-        <div className="glass-card bg-slate-950/70 border-slate-800/80 rounded-3xl p-6 lg:p-8 shadow-2xl relative overflow-x-auto min-w-[700px] md:min-w-0">
+        <div className="glass-card bg-white/50 dark:bg-slate-950/70 border-slate-200/80 dark:border-slate-800/80 rounded-3xl p-6 lg:p-8 shadow-2xl relative overflow-x-auto min-w-[700px] md:min-w-0">
           
           {/* Legend indicator */}
-          <div className="absolute top-6 left-6 z-20 flex items-center gap-6 text-xs text-slate-400 bg-slate-900/80 backdrop-blur-md px-4 py-2.5 rounded-xl border border-slate-800">
+          <div className="absolute top-6 left-6 z-20 flex items-center gap-6 text-xs text-slate-600 dark:text-slate-400 bg-white/95 dark:bg-slate-900/80 backdrop-blur-md px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-primary-green animate-ping shrink-0" />
               <span>Rajkot Origin</span>
@@ -126,7 +186,7 @@ export default function GlobalReachMap() {
           {/* SVG Map Canvas */}
           <svg
             viewBox="0 0 800 450"
-            className="w-full h-auto text-slate-800"
+            className="w-full h-auto text-slate-300 dark:text-slate-800"
             xmlns="http://www.w3.org/2000/svg"
           >
             {/* Dotted Stylized Continental Grid for futuristic dashboard look */}
@@ -228,37 +288,37 @@ export default function GlobalReachMap() {
           </svg>
 
           {/* Interactive Tooltip Card overlay */}
-          <div className="min-h-[100px] bg-slate-900 border border-slate-800/80 rounded-2xl p-5 mt-6 grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+          <div className="min-h-[100px] bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800/80 rounded-2xl p-5 mt-6 grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
             {hoveredCountry ? (
               <>
                 <div className="md:col-span-1">
-                  <span className="block text-slate-500 text-[10px] font-bold uppercase tracking-wider">Target Destination</span>
-                  <span className="text-base font-extrabold text-white">{hoveredCountry.name}</span>
+                  <span className="block text-slate-500 dark:text-slate-500 text-[10px] font-bold uppercase tracking-wider">Target Destination</span>
+                  <span className="text-base font-extrabold text-slate-900 dark:text-white">{hoveredCountry.name}</span>
                 </div>
                 <div className="md:col-span-1 flex items-center gap-2">
                   <Ship className="w-5 h-5 text-primary-blue shrink-0" />
                   <div>
-                    <span className="block text-slate-500 text-[10px] font-bold uppercase tracking-wider">Logistics Transmit</span>
-                    <span className="text-xs font-semibold text-slate-200">{hoveredCountry.shippingDays}</span>
+                    <span className="block text-slate-500 dark:text-slate-500 text-[10px] font-bold uppercase tracking-wider">Logistics Transmit</span>
+                    <span className="text-xs font-semibold text-slate-700 dark:text-slate-200">{hoveredCountry.shippingDays}</span>
                   </div>
                 </div>
                 <div className="md:col-span-1 flex items-center gap-2">
                   <Navigation className="w-5 h-5 text-primary-green shrink-0" />
                   <div>
-                    <span className="block text-slate-500 text-[10px] font-bold uppercase tracking-wider">Key Export Cap</span>
-                    <span className="text-xs font-semibold text-slate-200">{hoveredCountry.keyProduct}</span>
+                    <span className="block text-slate-500 dark:text-slate-500 text-[10px] font-bold uppercase tracking-wider">Key Export Cap</span>
+                    <span className="text-xs font-semibold text-slate-700 dark:text-slate-200">{hoveredCountry.keyProduct}</span>
                   </div>
                 </div>
                 <div className="md:col-span-1 flex items-center gap-2">
                   <Anchor className="w-5 h-5 text-primary-blue shrink-0" />
                   <div>
-                    <span className="block text-slate-500 text-[10px] font-bold uppercase tracking-wider">Shipping Method</span>
-                    <span className="text-xs font-semibold text-slate-200">{hoveredCountry.transport}</span>
+                    <span className="block text-slate-500 dark:text-slate-500 text-[10px] font-bold uppercase tracking-wider">Shipping Method</span>
+                    <span className="text-xs font-semibold text-slate-700 dark:text-slate-200">{hoveredCountry.transport}</span>
                   </div>
                 </div>
               </>
             ) : (
-              <div className="md:col-span-4 text-center py-4 text-slate-500 text-xs font-medium tracking-wide">
+              <div className="md:col-span-4 text-center py-4 text-slate-600 dark:text-slate-500 text-xs font-medium tracking-wide">
                 Hover over the map nodes to inspect export times, shipping methods, and product distributions.
               </div>
             )}
