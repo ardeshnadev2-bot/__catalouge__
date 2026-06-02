@@ -28,6 +28,9 @@ export default function Home() {
         {/* Clientele Showcase */}
         <ClienteleSection />
 
+        {/* Our Exports Map */}
+        <GlobalReachMap />
+
         {/* 2. Legacy Introduction & Key Industrial Advantages */}
         <AboutSection />
 
@@ -42,9 +45,6 @@ export default function Home() {
 
         {/* 6. Green Sustainability Commitment */}
         <SustainabilitySection />
-
-        {/* 7. Interactive Global Presence Map & Arcs */}
-        <GlobalReachMap />
 
         {/* 8. Compliance & Accreditation Badges */}
         <Certifications />

@@ -98,7 +98,7 @@ export default function GlobalReachMap() {
         <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-blue/10 text-accent-blue text-xs font-semibold uppercase tracking-wider">
             <Globe2 className="w-4 h-4 text-primary-green" />
-            Global Export Footprint
+            Our Exports
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight">
             Connecting Rajkot to Global Markets
