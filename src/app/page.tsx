@@ -31,11 +31,11 @@ export default function Home() {
         {/* Our Exports Map */}
         <GlobalReachMap />
 
-        {/* 2. Legacy Introduction & Key Industrial Advantages */}
-        <AboutSection />
-
         {/* 3. Filterable Product Range & Dynamic PDF Spec sheets */}
         <ProductsSection />
+
+        {/* 2. Legacy Introduction & Key Industrial Advantages */}
+        <AboutSection />
 
         {/* 4. Target Industry Sectors Grid */}
         <IndustriesSection />

@@ -263,7 +263,7 @@ export default function ProductsSection() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-4">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-dark dark:text-white">
-            Our Premium Product Range
+            Our Range of Products
           </h2>
           <p className="text-text-light dark:text-slate-400 font-light max-w-2xl mx-auto">
             Explore our industrial polymer closures. Sourced with virgin food-grade resins, each model has been drop-tested, seal-rated, and customized to global shipping specifications.
