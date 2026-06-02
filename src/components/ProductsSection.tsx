@@ -153,24 +153,14 @@ export default function ProductsSection() {
   }, [activeCategory]);
 
   const handleEnquire = (productName: string) => {
-    // Send customized event to ContactForm
-    const event = new CustomEvent('select-product', { detail: productName });
-    window.dispatchEvent(event);
+    // Switch tab to contact first
+    window.location.hash = '#contact';
 
-    // Scroll to contact form
-    const element = document.getElementById('contact');
-    if (element) {
-      const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-    }
+    // Send customized event to ContactForm after small delay so ContactSection has time to mount
+    setTimeout(() => {
+      const event = new CustomEvent('select-product', { detail: productName });
+      window.dispatchEvent(event);
+    }, 100);
   };
 
   const handleDownloadPDF = (product: Product) => {

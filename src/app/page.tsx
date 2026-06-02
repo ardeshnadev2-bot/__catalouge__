@@ -1,3 +1,6 @@
+'use client';
+
+import { useState, useEffect } from 'react';
 import { Navbar } from '@/components/Navbar';
 import HeroSection from '@/components/HeroSection';
 import ClienteleSection from '@/components/ClienteleSection';
@@ -15,48 +18,60 @@ import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 
 export default function Home() {
+  const [activeTab, setActiveTab] = useState('home');
+
+  useEffect(() => {
+    const handleHashChange = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash) {
+        setActiveTab(hash);
+      } else {
+        setActiveTab('home');
+      }
+      // Scroll to top when changing tabs so the new section is seen from the start
+      window.scrollTo(0, 0);
+    };
+
+    handleHashChange(); // run on initial mount
+    window.addEventListener('hashchange', handleHashChange);
+    return () => window.removeEventListener('hashchange', handleHashChange);
+  }, []);
+
   return (
     <>
       {/* Global Navigation Bar */}
       <Navbar />
 
-      {/* Main Single Page Layout Sections */}
-      <main className="flex-grow">
-        {/* 1. Hero Section & Statistics */}
-        <HeroSection />
+      {/* Main Tab-based Page Layout */}
+      <main className="flex-grow pt-20">
+        {activeTab === 'home' && (
+          <>
+            <HeroSection />
+            <ClienteleSection />
+            <Testimonials />
+          </>
+        )}
 
-        {/* Clientele Showcase */}
-        <ClienteleSection />
+        {activeTab === 'about' && (
+          <>
+            <AboutSection />
+            <Certifications />
+          </>
+        )}
 
-        {/* Our Exports Map */}
-        <GlobalReachMap />
+        {activeTab === 'products' && <ProductsSection />}
 
-        {/* 3. Filterable Product Range & Dynamic PDF Spec sheets */}
-        <ProductsSection />
+        {activeTab === 'industries' && <IndustriesSection />}
 
-        {/* 2. Legacy Introduction & Key Industrial Advantages */}
-        <AboutSection />
+        {activeTab === 'infrastructure' && <InfrastructureSection />}
 
-        {/* 4. Target Industry Sectors Grid */}
-        <IndustriesSection />
+        {activeTab === 'sustainability' && <SustainabilitySection />}
 
-        {/* 5. Automated Factory Showcase & Metrics */}
-        <InfrastructureSection />
+        {activeTab === 'global-reach' && <GlobalReachMap />}
 
-        {/* 6. Green Sustainability Commitment */}
-        <SustainabilitySection />
+        {activeTab === 'gallery' && <GallerySection />}
 
-        {/* 8. Compliance & Accreditation Badges */}
-        <Certifications />
-
-        {/* 9. Verified Customer Reviews */}
-        <Testimonials />
-
-        {/* 10. Masonry Operation Gallery Grid */}
-        <GallerySection />
-
-        {/* 11. Custom Pre-filled Enquiry Contact Form */}
-        <ContactSection />
+        {activeTab === 'contact' && <ContactSection />}
       </main>
 
       {/* Footer Block */}
