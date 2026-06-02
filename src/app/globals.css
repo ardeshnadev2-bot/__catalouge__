@@ -24,7 +24,7 @@
 
 :root {
   --background: #FFFFFF;
-  --background-gradient: linear-gradient(135deg, #F0F7FA 0%, #F5FAF6 50%, #FFFFFF 100%);
+  --background-gradient: linear-gradient(135deg, #E0F2FE 0%, #F0FDF4 50%, #D1FAE5 100%);
   --foreground: #1E2D3B;
   --font-heading: 'Outfit';
   --font-body: 'Inter';
