@@ -29,27 +29,45 @@ export function Navbar() {
       } else {
         setScrolled(false);
       }
+
+      // Scroll Spy logic
+      const sections = ['home', 'about', 'products', 'industries', 'infrastructure', 'sustainability', 'global-reach', 'gallery', 'contact'];
+      const scrollPosition = window.scrollY + 100; // offset
+
+      for (const section of sections) {
+        const el = document.getElementById(section);
+        if (el) {
+          const top = el.offsetTop;
+          const height = el.offsetHeight;
+          if (scrollPosition >= top && scrollPosition < top + height) {
+            setActiveSection(section);
+            break;
+          }
+        }
+      }
     };
 
-    const handleHashChange = () => {
-      const hash = window.location.hash.replace('#', '');
-      setActiveSection(hash || 'home');
-    };
-
-    handleHashChange(); // set initial active state
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('hashchange', handleHashChange);
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('hashchange', handleHashChange);
-    };
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
-    window.location.hash = href;
+    const targetId = href.replace('#', '');
+    const element = document.getElementById(targetId);
+    if (element) {
+      const offset = 80; // height of fixed navbar
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }
   };
 
   return (

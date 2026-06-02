@@ -48,7 +48,19 @@ function AnimatedCounter({ value, duration = 2 }: { value: string; duration?: nu
 
 export default function HeroSection() {
   const handleScrollTo = (id: string) => {
-    window.location.hash = '#' + id;
+    const element = document.getElementById(id);
+    if (element) {
+      const offset = 80;
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = element.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = elementPosition - offset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth',
+      });
+    }
   };
 
   return (
