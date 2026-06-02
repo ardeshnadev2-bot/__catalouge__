@@ -28,11 +28,11 @@ export default function Home() {
         {/* Clientele Showcase */}
         <ClienteleSection />
 
-        {/* Our Exports Map */}
-        <GlobalReachMap />
-
         {/* 3. Filterable Product Range & Dynamic PDF Spec sheets */}
         <ProductsSection />
+
+        {/* Our Exports Map */}
+        <GlobalReachMap />
 
         {/* 2. Legacy Introduction & Key Industrial Advantages */}
         <AboutSection />
