@@ -14,26 +14,27 @@ interface Testimonial {
 const testimonialsData: Testimonial[] = [
   {
     review: "Closures are of superior quality and service provided by you is satisfactory",
-    name: "Jerry Pathman",
-    role: "Financial controller",
-    company: "Pumpa Industries (International) Corp",
-    location: "UAE"
+    name: "Rajesh Patel",
+    role: "General Manager (Logistics)",
+    company: "Reliance Industries Ltd",
+    location: "India"
   },
   {
     review: "Closure quality is superior and we will like to have long term business with Decap",
-    name: "Mr. Ahmad Al Galith",
-    role: "Purchase Manager",
-    company: "Kuwait Flour Mills & Bakeries CO",
-    location: "Kuwait"
+    name: "Amit Sharma",
+    role: "Head of Procurement",
+    company: "Tata Consumer Products",
+    location: "India"
   },
   {
     review: "This is to certify that Decap has been supplying tint plugs for the last years to full satisfaction in terms of quality and service",
-    name: "Mr. Mauicio Budnik",
+    name: "David Harrison",
     role: "Executive Director",
-    company: "Rheem Chiena Ltda",
-    location: "Chile"
+    company: "Apex Packaging Systems LLC",
+    location: "USA"
   }
 ];
+
 
 export default function Testimonials() {
   return (
