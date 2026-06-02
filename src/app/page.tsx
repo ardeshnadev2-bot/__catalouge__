@@ -18,17 +18,22 @@ import ContactSection from '@/components/ContactSection';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 
+type ActiveViewType = 'all' | 'home' | 'about' | 'products' | 'industries' | 'infrastructure' | 'sustainability' | 'global-reach' | 'gallery' | 'contact';
+
 export default function Home() {
-  const [onlyProducts, setOnlyProducts] = useState(false);
+  const [activeView, setActiveView] = useState<ActiveViewType>('all');
 
   useEffect(() => {
+    const validSections = ['home', 'about', 'products', 'packaging', 'industries', 'infrastructure', 'sustainability', 'global-reach', 'gallery', 'contact'];
+
     // 1. Initial URL hash check (safe for client side execution)
     const checkHash = () => {
-      const hash = window.location.hash;
-      if (hash === '#products' || hash === '#packaging') {
-        setOnlyProducts(true);
+      const hash = window.location.hash.replace('#', '');
+      if (validSections.includes(hash)) {
+        const targetView = hash === 'packaging' ? 'products' : hash;
+        setActiveView(targetView as ActiveViewType);
       } else {
-        setOnlyProducts(false);
+        setActiveView('all');
       }
     };
 
@@ -42,18 +47,20 @@ export default function Home() {
       const customEvent = e as CustomEvent<{ targetId: string }>;
       const targetId = customEvent.detail.targetId;
       
-      if (targetId === 'products' || targetId === 'packaging') {
-        setOnlyProducts(true);
+      if (validSections.includes(targetId)) {
+        const view = targetId === 'packaging' ? 'products' : targetId;
+        setActiveView(view as ActiveViewType);
+        
         setTimeout(() => {
           const el = document.getElementById(targetId);
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
         }, 150);
       } else {
-        setOnlyProducts(false);
-        setTimeout(() => {
-          const el = document.getElementById(targetId);
-          if (el) el.scrollIntoView({ behavior: 'smooth' });
-        }, 150);
+        setActiveView('all');
       }
     };
 
@@ -61,7 +68,7 @@ export default function Home() {
 
     // 4. Restore sections when selecting/enquiring a product (which scrolls to contact)
     const handleSelectProduct = () => {
-      setOnlyProducts(false);
+      setActiveView('contact');
       setTimeout(() => {
         const el = document.getElementById('contact');
         if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -85,9 +92,60 @@ export default function Home() {
       {/* Main Single Page Layout Sections */}
       <main className="flex-grow">
         <AnimatePresence mode="wait">
-          {onlyProducts ? (
+          {activeView === 'all' && (
             <motion.div
-              key="products-only-view"
+              key="all-view"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="space-y-0"
+            >
+              <HeroSection />
+              <ClienteleSection />
+              <GlobalReachMap />
+              <ProductsSection />
+              <AboutSection />
+              <IndustriesSection />
+              <InfrastructureSection />
+              <SustainabilitySection />
+              <Certifications />
+              <Testimonials />
+              <GallerySection />
+              <ContactSection />
+            </motion.div>
+          )}
+
+          {activeView === 'home' && (
+            <motion.div
+              key="home-view"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
+            >
+              <HeroSection />
+              <ClienteleSection />
+            </motion.div>
+          )}
+
+          {activeView === 'about' && (
+            <motion.div
+              key="about-view"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
+            >
+              <AboutSection />
+              <Certifications />
+              <Testimonials />
+            </motion.div>
+          )}
+
+          {activeView === 'products' && (
+            <motion.div
+              key="products-view"
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -15 }}
@@ -95,49 +153,76 @@ export default function Home() {
             >
               <ProductsSection />
             </motion.div>
-          ) : (
+          )}
+
+          {activeView === 'industries' && (
             <motion.div
-              key="all-sections-view"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.4 }}
-              className="space-y-0"
+              key="industries-view"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
             >
-              {/* 1. Hero Section & Statistics */}
-              <HeroSection />
-
-              {/* Clientele Showcase */}
-              <ClienteleSection />
-
-              {/* Our Exports Map */}
-              <GlobalReachMap />
-
-              {/* 3. Filterable Product Range & Dynamic PDF Spec sheets */}
-              <ProductsSection />
-
-              {/* 2. Legacy Introduction & Key Industrial Advantages */}
-              <AboutSection />
-
-              {/* 4. Target Industry Sectors Grid */}
               <IndustriesSection />
+            </motion.div>
+          )}
 
-              {/* 5. Automated Factory Showcase & Metrics */}
+          {activeView === 'infrastructure' && (
+            <motion.div
+              key="infrastructure-view"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
+            >
               <InfrastructureSection />
+            </motion.div>
+          )}
 
-              {/* 6. Green Sustainability Commitment */}
+          {activeView === 'sustainability' && (
+            <motion.div
+              key="sustainability-view"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
+            >
               <SustainabilitySection />
+            </motion.div>
+          )}
 
-              {/* 8. Compliance & Accreditation Badges */}
-              <Certifications />
+          {activeView === 'global-reach' && (
+            <motion.div
+              key="global-reach-view"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
+            >
+              <GlobalReachMap />
+            </motion.div>
+          )}
 
-              {/* 9. Verified Customer Reviews */}
-              <Testimonials />
-
-              {/* 10. Masonry Operation Gallery Grid */}
+          {activeView === 'gallery' && (
+            <motion.div
+              key="gallery-view"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
+            >
               <GallerySection />
+            </motion.div>
+          )}
 
-              {/* 11. Custom Pre-filled Enquiry Contact Form */}
+          {activeView === 'contact' && (
+            <motion.div
+              key="contact-view"
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -15 }}
+              transition={{ duration: 0.4, ease: 'easeInOut' }}
+            >
               <ContactSection />
             </motion.div>
           )}
