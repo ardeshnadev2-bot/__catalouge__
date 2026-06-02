@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import Image from 'next/image';
 import {
   Droplet,
   GlassWater,
@@ -17,6 +18,10 @@ import {
   Fingerprint,
   CheckCircle2,
   Zap,
+  Leaf,
+  Globe,
+  Users,
+  Heart,
 } from 'lucide-react';
 
 const industries = [
@@ -126,109 +131,37 @@ export default function IndustriesSection() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Split Layout: Top Section */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center mb-20 lg:mb-28">
-          
-          {/* Left Column: Content + Benefits Grid */}
-          <div className="space-y-8">
-            <div className="space-y-4">
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary-blue/10 dark:bg-primary-green/10 border border-primary-blue/20 dark:border-primary-green/20 text-xs font-semibold tracking-wider uppercase text-primary-blue dark:text-primary-green">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>Engineered Excellence</span>
-              </div>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-text-dark dark:text-white leading-tight">
-                Designed for <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-blue to-accent-blue dark:from-primary-green dark:to-accent-green">Ease</span>,<br />
-                Built for <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary-green to-accent-green dark:from-primary-blue to-accent-blue">Convenience</span>
-              </h2>
-              <p className="text-text-light dark:text-slate-400 font-light text-base sm:text-lg leading-relaxed max-w-xl">
-                At Anjani Closures, we combine innovative engineering with high-quality manufacturing to deliver closures that are secure yet easy to open.
-              </p>
-            </div>
-
-            {/* 2x2 Benefits Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              
-              {/* Benefit 1 */}
-              <div className="glass-card rounded-2xl p-5 flex flex-col space-y-3 hover:border-primary-blue/25 dark:hover:border-primary-green/25 hover:shadow-lg hover:shadow-primary-blue/5 dark:hover:shadow-primary-green/5 transition-all duration-300">
-                <div className="w-10 h-10 rounded-xl bg-primary-blue/10 dark:bg-primary-green/10 flex items-center justify-center text-primary-blue dark:text-primary-green">
-                  <Fingerprint className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-sm font-bold text-text-dark dark:text-white">Effortless Use</h4>
-                  <p className="text-xs text-text-light dark:text-slate-400 font-light mt-1 leading-relaxed">
-                    Closures designed for smooth, hassle-free access.
-                  </p>
-                </div>
-              </div>
-
-              {/* Benefit 2 */}
-              <div className="glass-card rounded-2xl p-5 flex flex-col space-y-3 hover:border-primary-blue/25 dark:hover:border-primary-green/25 hover:shadow-lg hover:shadow-primary-blue/5 dark:hover:shadow-primary-green/5 transition-all duration-300">
-                <div className="w-10 h-10 rounded-xl bg-primary-blue/10 dark:bg-primary-green/10 flex items-center justify-center text-primary-blue dark:text-primary-green">
-                  <CheckCircle2 className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-sm font-bold text-text-dark dark:text-white">Secure Sealing</h4>
-                  <p className="text-xs text-text-light dark:text-slate-400 font-light mt-1 leading-relaxed">
-                    Reliable closures that preserve freshness and prevent leakage.
-                  </p>
-                </div>
-              </div>
-
-              {/* Benefit 3 */}
-              <div className="glass-card rounded-2xl p-5 flex flex-col space-y-3 hover:border-primary-blue/25 dark:hover:border-primary-green/25 hover:shadow-lg hover:shadow-primary-blue/5 dark:hover:shadow-primary-green/5 transition-all duration-300">
-                <div className="w-10 h-10 rounded-xl bg-primary-blue/10 dark:bg-primary-green/10 flex items-center justify-center text-primary-blue dark:text-primary-green">
-                  <Zap className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-sm font-bold text-text-dark dark:text-white">Innovative Solutions</h4>
-                  <p className="text-xs text-text-light dark:text-slate-400 font-light mt-1 leading-relaxed">
-                    Functional designs meeting modern consumer requirements.
-                  </p>
-                </div>
-              </div>
-
-              {/* Benefit 4 */}
-              <div className="glass-card rounded-2xl p-5 flex flex-col space-y-3 hover:border-primary-blue/25 dark:hover:border-primary-green/25 hover:shadow-lg hover:shadow-primary-blue/5 dark:hover:shadow-primary-green/5 transition-all duration-300">
-                <div className="w-10 h-10 rounded-xl bg-primary-blue/10 dark:bg-primary-green/10 flex items-center justify-center text-primary-blue dark:text-primary-green">
-                  <Sparkles className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-sm font-bold text-text-dark dark:text-white">User-Friendly Designs</h4>
-                  <p className="text-xs text-text-light dark:text-slate-400 font-light mt-1 leading-relaxed">
-                    Flip-tops, screw caps, and spouts built for convenience.
-                  </p>
-                </div>
-              </div>
-
+        {/* Banner Block */}
+        <div className="relative rounded-3xl overflow-hidden glass-card mb-20">
+          <div className="relative aspect-[21/9] md:aspect-[21/6] w-full">
+            <Image
+              src="/images/industries_banner.png"
+              alt="Tailored Closure Solutions"
+              fill
+              className="object-cover"
+              priority
+            />
+          </div>
+          <div className="p-8 md:p-12 space-y-6 bg-white dark:bg-slate-900/90">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-text-dark dark:text-white uppercase">
+              Tailored Closure Solutions for <span className="text-orange-600 dark:text-orange-500">Every Industry</span>
+            </h2>
+            <div>
+              <button
+                onClick={() => {
+                  const el = document.getElementById('versatility-grid');
+                  if (el) el.scrollIntoView({ behavior: 'smooth' });
+                }}
+                className="inline-block px-8 py-3.5 bg-orange-600 hover:bg-orange-700 text-white font-bold text-sm tracking-wider rounded-xl uppercase transition-all duration-300 transform hover:scale-105 shadow-md shadow-orange-600/20 active:scale-95 cursor-pointer"
+              >
+                Know More
+              </button>
             </div>
           </div>
-
-          {/* Right Column: Factory Video Embed */}
-          <div className="relative group w-full">
-            {/* Decorative background glow */}
-            <div className="absolute -inset-1.5 bg-gradient-to-r from-primary-blue to-primary-green rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200" />
-            
-            {/* Framed iframe wrapper */}
-            <div className="relative glass-card rounded-2xl overflow-hidden p-2">
-              <div className="relative aspect-video w-full rounded-xl overflow-hidden bg-slate-950">
-                <iframe
-                  src="https://www.youtube.com/embed/XHOmBV4js_E?autoplay=1&mute=1&loop=1&playlist=XHOmBV4js_E&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1"
-                  title="Anjani Closures Production Line"
-                  className="absolute inset-0 w-full h-full object-cover pointer-events-none"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                />
-              </div>
-            </div>
-          </div>
-
         </div>
 
-        {/* Separator / Spacer */}
-        <div className="border-t border-slate-200/10 dark:border-slate-800/30 my-16" />
-
-        {/* Bottom Section: Versatility Across Industries */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        {/* Section: Versatility Across Industries (12 cards) */}
+        <div id="versatility-grid" className="scroll-mt-24 text-center max-w-3xl mx-auto mb-16 space-y-4">
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-dark dark:text-white">
             Versatility Across Industries
           </h2>
@@ -268,6 +201,214 @@ export default function IndustriesSection() {
             </motion.div>
           ))}
         </motion.div>
+
+        {/* Separator */}
+        <div className="border-t border-slate-200/10 dark:border-slate-800/30 my-20" />
+
+        {/* Designed for Ease Section with Photos */}
+        <div className="space-y-16">
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary-blue/10 dark:bg-primary-green/10 border border-primary-blue/20 dark:border-primary-green/20 text-xs font-semibold tracking-wider uppercase text-primary-blue dark:text-primary-green">
+              <Sparkles className="w-3.5 h-3.5" />
+              <span>User-Centric Innovation</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-dark dark:text-white">
+              Designed for Ease, Built for Convenience
+            </h2>
+            <p className="text-text-light dark:text-slate-400 font-light max-w-2xl mx-auto leading-relaxed">
+              We engineer our closure systems with the end-user in mind. From effortless flip-top opening to precision pouring, our designs ensure a premium experience while maintaining absolute container integrity.
+            </p>
+          </div>
+
+          {/* Two-Column Showcase with Photos */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+            
+            {/* Card 1: Effortless Use */}
+            <div className="group glass-card rounded-3xl overflow-hidden flex flex-col hover:border-primary-blue/25 dark:hover:border-primary-green/25 hover:shadow-2xl hover:shadow-primary-blue/5 transition-all duration-500">
+              <div className="relative aspect-[16/10] w-full overflow-hidden">
+                <Image
+                  src="/images/closure_ease.png"
+                  alt="Effortless open closure design"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent" />
+                <div className="absolute bottom-6 left-6 text-white">
+                  <span className="px-2.5 py-1 rounded-md bg-primary-blue/80 text-[10px] font-bold tracking-wider uppercase">
+                    Ergonomic Flow
+                  </span>
+                </div>
+              </div>
+              <div className="p-6 md:p-8 flex-grow flex flex-col justify-between space-y-4 bg-white/50 dark:bg-slate-900/40">
+                <div className="space-y-2">
+                  <h3 className="text-lg md:text-xl font-bold text-text-dark dark:text-white group-hover:text-primary-blue transition-colors">
+                    Effortless Flipping
+                  </h3>
+                  <p className="text-sm text-text-light dark:text-slate-400 font-light leading-relaxed">
+                    Designed with ergonomic hinge mechanics and finger-slots that allow consumers to open and close packaging with single-handed ease, creating a satisfying and zero-friction experience.
+                  </p>
+                </div>
+                <div className="flex items-center gap-3 pt-2 text-xs font-semibold text-primary-blue dark:text-primary-green">
+                  <span>Smooth Hinge System</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600" />
+                  <span>Single Hand Open</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2: Perfect Pouring */}
+            <div className="group glass-card rounded-3xl overflow-hidden flex flex-col hover:border-primary-blue/25 dark:hover:border-primary-green/25 hover:shadow-2xl hover:shadow-primary-blue/5 transition-all duration-500">
+              <div className="relative aspect-[16/10] w-full overflow-hidden">
+                <Image
+                  src="/images/closure_convenience.png"
+                  alt="Convenient anti-drip pouring cap"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 to-transparent" />
+                <div className="absolute bottom-6 left-6 text-white">
+                  <span className="px-2.5 py-1 rounded-md bg-primary-green/80 text-[10px] font-bold tracking-wider uppercase">
+                    Anti-Spill Tech
+                  </span>
+                </div>
+              </div>
+              <div className="p-6 md:p-8 flex-grow flex flex-col justify-between space-y-4 bg-white/50 dark:bg-slate-900/40">
+                <div className="space-y-2">
+                  <h3 className="text-lg md:text-xl font-bold text-text-dark dark:text-white group-hover:text-primary-green transition-colors">
+                    Perfect Pouring
+                  </h3>
+                  <p className="text-sm text-text-light dark:text-slate-400 font-light leading-relaxed">
+                    Engineered pouring spouts featuring precise cut-offs and anti-drip rims. Prevents messy spills, controls fluid discharge, and keeps container necks clean for food products, cosmetics, and oils.
+                  </p>
+                </div>
+                <div className="flex items-center gap-3 pt-2 text-xs font-semibold text-primary-blue dark:text-primary-green">
+                  <span>Anti-Drip Lip</span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-slate-300 dark:bg-slate-600" />
+                  <span>Controlled Flow Rate</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        {/* Separator */}
+        <div className="border-t border-slate-200/10 dark:border-slate-800/30 my-20" />
+
+        {/* Machinery Factory Video Section */}
+        <div className="space-y-12">
+          <div className="text-center max-w-3xl mx-auto space-y-4">
+            <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-text-dark dark:text-white">
+              Precision Machinery in Action
+            </h2>
+            <p className="text-text-light dark:text-slate-400 font-light max-w-2xl mx-auto leading-relaxed">
+              Explore our automated manufacturing floor, equipped with high-speed injection molding machines and assembly lines operating at micrometer precision to deliver consistent quality at scale.
+            </p>
+          </div>
+
+          <div className="relative group max-w-4xl mx-auto w-full">
+            {/* Decorative background glow */}
+            <div className="absolute -inset-1.5 bg-gradient-to-r from-primary-blue to-primary-green rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200" />
+            
+            {/* Framed iframe wrapper */}
+            <div className="relative glass-card rounded-2xl overflow-hidden p-2 bg-slate-100/50 dark:bg-slate-900/50">
+              <div className="relative aspect-video w-full rounded-xl overflow-hidden bg-slate-950 shadow-inner">
+                <iframe
+                  src="https://www.youtube.com/embed/XHOmBV4js_E?autoplay=1&mute=1&loop=1&playlist=XHOmBV4js_E&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1"
+                  title="Anjani Closures Production Line"
+                  className="absolute inset-0 w-full h-full object-cover"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Separator */}
+        <div className="border-t border-slate-200/10 dark:border-slate-800/30 my-20" />
+
+        {/* Corporate Social Responsibility Section */}
+        <div className="space-y-12">
+          <div className="glass-card rounded-3xl p-8 md:p-12 relative overflow-hidden bg-gradient-to-br from-emerald-500/5 to-teal-500/5 border border-primary-green/20">
+            {/* Ambient green light glow */}
+            <div className="absolute -bottom-20 -right-20 w-80 h-80 bg-primary-green/10 rounded-full blur-3xl pointer-events-none" />
+            
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 items-center relative z-10">
+              
+              {/* CSR Info Left */}
+              <div className="lg:col-span-1 space-y-4">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-[10px] font-bold tracking-wider uppercase text-emerald-600 dark:text-emerald-400">
+                  <span>Our CSR Pledge</span>
+                </div>
+                <h3 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-text-dark dark:text-white">
+                  Corporate Social Responsibility
+                </h3>
+                <p className="text-sm text-text-light dark:text-slate-400 font-light leading-relaxed">
+                  We believe in growing sustainably. Our corporate policies are aligned with environmental safety, human well-being, and resource conservation.
+                </p>
+              </div>
+
+              {/* CSR Items Right */}
+              <div className="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                
+                {/* CSR Point 1 */}
+                <div className="flex items-start gap-4 p-4 rounded-2xl bg-white/40 dark:bg-slate-900/30 border border-slate-200/20">
+                  <div className="w-10 h-10 shrink-0 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-600 dark:text-emerald-400">
+                    <Leaf className="w-5 h-5" />
+                  </div>
+                  <div className="space-y-1">
+                    <h4 className="text-sm font-bold text-text-dark dark:text-white">Eco-Conscious Materials</h4>
+                    <p className="text-xs text-text-light dark:text-slate-400 font-light leading-relaxed">
+                      Utilizing high-purity, food-grade materials that are 100% recyclable. We actively work to reduce material weight while retaining mechanical performance.
+                    </p>
+                  </div>
+                </div>
+
+                {/* CSR Point 2 */}
+                <div className="flex items-start gap-4 p-4 rounded-2xl bg-white/40 dark:bg-slate-900/30 border border-slate-200/20">
+                  <div className="w-10 h-10 shrink-0 rounded-xl bg-blue-500/10 flex items-center justify-center text-blue-600 dark:text-blue-400">
+                    <Globe className="w-5 h-5" />
+                  </div>
+                  <div className="space-y-1">
+                    <h4 className="text-sm font-bold text-text-dark dark:text-white">Carbon Footprint Reduction</h4>
+                    <p className="text-xs text-text-light dark:text-slate-400 font-light leading-relaxed">
+                      Optimized operations via energy-efficient injection molding and heat-recovery systems, cutting down electrical consumption per ton of polymer processed.
+                    </p>
+                  </div>
+                </div>
+
+                {/* CSR Point 3 */}
+                <div className="flex items-start gap-4 p-4 rounded-2xl bg-white/40 dark:bg-slate-900/30 border border-slate-200/20">
+                  <div className="w-10 h-10 shrink-0 rounded-xl bg-teal-500/10 flex items-center justify-center text-teal-600 dark:text-teal-400">
+                    <Users className="w-5 h-5" />
+                  </div>
+                  <div className="space-y-1">
+                    <h4 className="text-sm font-bold text-text-dark dark:text-white">Workplace Safety & Care</h4>
+                    <p className="text-xs text-text-light dark:text-slate-400 font-light leading-relaxed">
+                      Ensuring safe industrial operations, ongoing safety training, and welfare programs for our workforce, maintaining a zero-accident factory standard.
+                    </p>
+                  </div>
+                </div>
+
+                {/* CSR Point 4 */}
+                <div className="flex items-start gap-4 p-4 rounded-2xl bg-white/40 dark:bg-slate-900/30 border border-slate-200/20">
+                  <div className="w-10 h-10 shrink-0 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-600 dark:text-amber-400">
+                    <Heart className="w-5 h-5" />
+                  </div>
+                  <div className="space-y-1">
+                    <h4 className="text-sm font-bold text-text-dark dark:text-white">Ethical Supply Chain</h4>
+                    <p className="text-xs text-text-light dark:text-slate-400 font-light leading-relaxed">
+                      Strict raw material sourcing from suppliers adhering to global anti-pollution acts, child labor prohibition, and fair compensation policies.
+                    </p>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
 
       </div>
     </section>
