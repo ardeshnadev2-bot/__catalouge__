@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Download, MessageSquare, ShieldCheck, Check } from 'lucide-react';
+import { Download, MessageSquare, ShieldCheck } from 'lucide-react';
 
 interface Product {
   id: string;
@@ -160,19 +160,9 @@ export default function ProductsSection() {
     // Scroll to contact form
     const element = document.getElementById('contact');
     if (element) {
-      const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-
-      // Update URL hash
-      window.history.pushState(null, '', '#contact');
+      element.scrollIntoView({ behavior: 'smooth' });
+      // Update URL hash without polluting browser history back stack
+      window.history.replaceState(null, '', '#contact');
     }
   };
 

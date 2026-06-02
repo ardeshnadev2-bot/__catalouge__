@@ -1,6 +1,5 @@
 'use client';
 
-import { motion } from 'framer-motion';
 import { Leaf, Award, Recycle, Sun } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
@@ -8,7 +7,10 @@ import { useEffect, useState } from 'react';
 function FallingLeaves() {
   const [mounted, setMounted] = useState(false);
   useEffect(() => {
-    setMounted(true);
+    const frameId = requestAnimationFrame(() => {
+      setMounted(true);
+    });
+    return () => cancelAnimationFrame(frameId);
   }, []);
 
   if (!mounted) return null;
@@ -16,10 +18,10 @@ function FallingLeaves() {
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
       {Array.from({ length: 12 }).map((_, i) => {
-        const startLeft = `${Math.random() * 100}%`;
-        const delay = `${Math.random() * 15}s`;
-        const duration = `${12 + Math.random() * 12}s`;
-        const scale = 0.5 + Math.random() * 0.8;
+        const startLeft = `${(i * 17) % 100}%`;
+        const delay = `${(i * 1.3) % 15}s`;
+        const duration = `${12 + (i * 1.7) % 12}s`;
+        const scale = 0.5 + ((i * 0.23) % 0.8);
         
         return (
           <div

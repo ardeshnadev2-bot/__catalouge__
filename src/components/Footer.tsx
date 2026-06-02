@@ -21,21 +21,15 @@ export function Footer() {
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
     const targetId = href.replace('#', '');
+
+    // Dispatch scroll event to notify components and lock scrollspy
+    window.dispatchEvent(new CustomEvent('scroll-to-section', { detail: { targetId } }));
+
     const element = document.getElementById(targetId);
     if (element) {
-      const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-
-      // Update URL hash
-      window.history.pushState(null, '', href);
+      element.scrollIntoView({ behavior: 'smooth' });
+      // Update URL hash without polluting browser history back stack
+      window.history.replaceState(null, '', href);
     }
   };
 

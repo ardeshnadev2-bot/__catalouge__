@@ -176,7 +176,7 @@ export default function GlobalReachMap() {
                     animate={{ strokeDasharray: '20, 200' }}
                     transition={{
                       repeat: Infinity,
-                      duration: 4 + Math.random() * 3,
+                      duration: 4 + (idx % 3) * 1.5,
                       ease: 'linear',
                     }}
                   />

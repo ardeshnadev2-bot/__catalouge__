@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, ComponentType } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Expand, Box, Settings, Compass, Ship, ShieldCheck } from 'lucide-react';
@@ -12,7 +12,7 @@ interface GalleryItem {
   categoryLabel: string;
   image: string;
   description: string;
-  icon: any;
+  icon: ComponentType<{ className?: string }>;
   aspect: string; // Tailwind aspect classes for masonry variation
 }
 

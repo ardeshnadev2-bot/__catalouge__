@@ -41,13 +41,6 @@ const testimonialsData: Testimonial[] = [
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      handleNext();
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [currentIndex]);
-
   const handlePrev = () => {
     setCurrentIndex((prev) => (prev === 0 ? testimonialsData.length - 1 : prev - 1));
   };
@@ -55,6 +48,13 @@ export default function Testimonials() {
   const handleNext = () => {
     setCurrentIndex((prev) => (prev === testimonialsData.length - 1 ? 0 : prev + 1));
   };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      handleNext();
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [currentIndex]);
 
   return (
     <section className="py-20 bg-slate-900 text-white relative overflow-hidden z-10 border-t border-slate-800">

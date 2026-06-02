@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
@@ -20,76 +20,118 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [scrollProgress, setScrollProgress] = useState(0);
+
+  const isScrollingToRef = useRef(false);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   useEffect(() => {
+    // 1. Lightweight Scroll Listener for Navbar styling and progress tracking
     const handleScroll = () => {
-      // Add background blur when scrolled
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
+      const isScrolled = window.scrollY > 20;
+      setScrolled((prev) => {
+        if (prev !== isScrolled) return isScrolled;
+        return prev;
+      });
 
-      // Scroll Spy logic
-      const sections = ['home', 'about', 'products', 'industries', 'infrastructure', 'sustainability', 'global-reach', 'gallery', 'contact'];
-      const scrollPosition = window.scrollY + 100; // offset
-
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const top = el.offsetTop;
-          const height = el.offsetHeight;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
+      // Calculate scroll progress percentage
+      const winScroll = document.documentElement.scrollTop || document.body.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const scrolledPercent = height > 0 ? (winScroll / height) * 100 : 0;
+      setScrollProgress(scrolledPercent);
     };
 
-    // Scroll to hash on page load (e.g. from shared link)
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll(); // Initial check
+
+    // 2. Synchronize navigation active state and lock scrollspy during manual scrolling
+    const handleScrollToSectionEvent = (e: Event) => {
+      const customEvent = e as CustomEvent<{ targetId: string }>;
+      const targetId = customEvent.detail.targetId;
+      setActiveSection(targetId);
+
+      // Lock scrollspy to prevent middle section updates
+      isScrollingToRef.current = true;
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+      scrollTimeoutRef.current = setTimeout(() => {
+        isScrollingToRef.current = false;
+      }, 1000);
+    };
+
+    window.addEventListener('scroll-to-section', handleScrollToSectionEvent);
+
+    // 3. High-Performance IntersectionObserver for Scroll Spy
+    const sections = ['home', 'about', 'products', 'industries', 'infrastructure', 'sustainability', 'global-reach', 'gallery', 'contact'];
+    
+    const observerOptions = {
+      root: null,
+      rootMargin: '-100px 0px -55% 0px', // Adjusted to account for sticky header height
+      threshold: [0, 0.1, 0.2],
+    };
+
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      // Skip updates if a scroll animation is currently active
+      if (isScrollingToRef.current) return;
+
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveSection(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    // 4. Smooth scroll to hash on page load with scrollspy lock
     const initialHash = window.location.hash;
     if (initialHash) {
-      setTimeout(() => {
-        const targetId = initialHash.replace('#', '');
-        const element = document.getElementById(targetId);
-        if (element) {
-          const offset = 80;
-          const bodyRect = document.body.getBoundingClientRect().top;
-          const elementRect = element.getBoundingClientRect().top;
-          const elementPosition = elementRect - bodyRect;
-          const offsetPosition = elementPosition - offset;
-          window.scrollTo({
-            top: offsetPosition,
-            behavior: 'smooth',
-          });
-        }
-      }, 600);
+      const targetId = initialHash.replace('#', '');
+      const element = document.getElementById(targetId);
+      if (element) {
+        setActiveSection(targetId);
+        isScrollingToRef.current = true;
+        
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+          scrollTimeoutRef.current = setTimeout(() => {
+            isScrollingToRef.current = false;
+          }, 1000);
+        }, 300);
+      }
     }
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll-to-section', handleScrollToSectionEvent);
+      observer.disconnect();
+      if (scrollTimeoutRef.current) clearTimeout(scrollTimeoutRef.current);
+    };
   }, []);
 
   const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     e.preventDefault();
-    setMobileMenuOpen(false);
     const targetId = href.replace('#', '');
+    
+    // Dispatch scroll event to notify components and lock scrollspy
+    window.dispatchEvent(new CustomEvent('scroll-to-section', { detail: { targetId } }));
+
     const element = document.getElementById(targetId);
     if (element) {
-      const offset = 80; // height of fixed navbar
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-
-      // Update URL hash
-      window.history.pushState(null, '', href);
+      if (mobileMenuOpen) {
+        setMobileMenuOpen(false);
+        // Wait for mobile menu closing transition to finish (avoiding multi-animation jank)
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 300);
+      } else {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+      window.history.replaceState(null, '', href);
     }
   };
 
@@ -218,6 +260,12 @@ export function Navbar() {
           </div>
         </div>
       </div>
+
+      {/* Scroll Progress Indicator Bar */}
+      <div 
+        className="absolute bottom-0 left-0 h-[3px] bg-gradient-to-r from-primary-blue to-primary-green transition-all duration-100 ease-out origin-left pointer-events-none"
+        style={{ width: `${scrollProgress}%` }}
+      />
     </nav>
   );
 }

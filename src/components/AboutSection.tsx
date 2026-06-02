@@ -2,7 +2,6 @@
 
 import { motion } from 'framer-motion';
 import { Cpu, ShieldCheck, Settings, CheckCircle2, Globe, Leaf, Building2 } from 'lucide-react';
-import Image from 'next/image';
 
 const advantages = [
   {

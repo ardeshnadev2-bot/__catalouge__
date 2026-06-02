@@ -48,21 +48,14 @@ function AnimatedCounter({ value, duration = 2 }: { value: string; duration?: nu
 
 export default function HeroSection() {
   const handleScrollTo = (id: string) => {
+    // Dispatch scroll event to notify components and lock scrollspy
+    window.dispatchEvent(new CustomEvent('scroll-to-section', { detail: { targetId: id } }));
+
     const element = document.getElementById(id);
     if (element) {
-      const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = element.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-
-      // Update URL hash
-      window.history.pushState(null, '', '#' + id);
+      element.scrollIntoView({ behavior: 'smooth' });
+      // Update URL hash without polluting browser history back stack
+      window.history.replaceState(null, '', '#' + id);
     }
   };
 
@@ -119,19 +112,27 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
             >
-              <button
-                onClick={() => handleScrollTo('products')}
+              <a
+                href="#products"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleScrollTo('products');
+                }}
                 className="flex items-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-primary-blue to-primary-green hover:shadow-lg hover:shadow-primary-blue/20 text-white font-semibold transition-all duration-300 transform hover:-translate-y-0.5 group w-full sm:w-auto justify-center"
               >
                 Explore Products
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </button>
-              <button
-                onClick={() => handleScrollTo('contact')}
+              </a>
+              <a
+                href="#contact"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleScrollTo('contact');
+                }}
                 className="flex items-center gap-1 px-8 py-3.5 rounded-full glass-card hover:bg-slate-100 dark:hover:bg-slate-800 text-text-dark dark:text-white font-semibold transition-all duration-300 w-full sm:w-auto justify-center"
               >
                 Contact Us
-              </button>
+              </a>
             </motion.div>
 
             {/* Mini Statistics Grid */}

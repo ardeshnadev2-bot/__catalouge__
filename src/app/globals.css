@@ -48,6 +48,11 @@ html {
   scroll-behavior: smooth;
 }
 
+section[id],
+#catalog-anchor {
+  scroll-margin-top: 80px;
+}
+
 body {
   background: var(--background-gradient);
   background-attachment: fixed;
