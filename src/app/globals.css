@@ -25,12 +25,12 @@
 :root {
   --background: #FFFFFF;
   --background-gradient: linear-gradient(135deg, #E0F2FE 0%, #F0FDF4 50%, #D1FAE5 100%);
-  --foreground: #1E2D3B;
+  --foreground: #0F3D59;
   --font-heading: 'Outfit';
   --font-body: 'Inter';
   
-  --color-text-dark: #1E2D3B;
-  --color-text-light: #5A6A7A;
+  --color-text-dark: #0F3D59;
+  --color-text-light: #2B4E68;
   --color-bg-light: #F2F9FA;
 }
 
