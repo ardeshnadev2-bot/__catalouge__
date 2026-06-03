@@ -4,6 +4,7 @@ import { useState, useMemo, useEffect } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Download, MessageSquare, ShieldCheck, Package, Cpu, ArrowRight, Settings, CheckCircle2, Paintbrush } from 'lucide-react';
+import { ThreeDCard } from './ThreeDCard';
 
 interface Product {
   id: string;
@@ -312,15 +313,15 @@ export default function ProductsSection() {
         >
           <AnimatePresence mode="popLayout">
             {filteredProducts.map((prod) => (
-              <motion.div
-                layout
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.3 }}
-                key={prod.id}
-                className="group glass-card rounded-2xl overflow-hidden flex flex-col justify-between hover:shadow-xl hover:shadow-primary-blue/5 dark:hover:shadow-primary-green/5 dark:hover:border-primary-green/20 hover:border-primary-blue/20"
-              >
+              <ThreeDCard key={prod.id} className="w-full h-full">
+                <motion.div
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.3 }}
+                  className="group glass-card rounded-2xl overflow-hidden flex flex-col justify-between hover:shadow-xl hover:shadow-primary-blue/5 dark:hover:shadow-primary-green/5 dark:hover:border-primary-green/20 hover:border-primary-blue/20 h-full"
+                >
                 {/* Product Image Area */}
                 <div className="h-60 relative w-full bg-slate-100/50 dark:bg-slate-950/20 flex items-center justify-center p-6 overflow-hidden border-b border-slate-100 dark:border-slate-800/80">
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary-blue/5 to-primary-green/5 pointer-events-none" />
@@ -408,7 +409,8 @@ export default function ProductsSection() {
                   </div>
                 </div>
               </motion.div>
-            ))}
+            </ThreeDCard>
+          ))}
           </AnimatePresence>
         </motion.div>
 

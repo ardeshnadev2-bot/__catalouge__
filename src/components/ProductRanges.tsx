@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { ThreeDCard } from './ThreeDCard';
 
 export default function ProductRanges() {
   const handleExplore = (category: string) => {
@@ -36,128 +37,132 @@ export default function ProductRanges() {
         {/* Side-by-Side Main Product Ranges */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Left: Jerry Cans, Spouts & Dispensing (Always White Background Theme) */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="group relative rounded-3xl overflow-hidden bg-white border border-slate-200 text-text-dark shadow-xl flex flex-col justify-between"
-          >
-            <div className="p-8 space-y-6">
-              <div className="space-y-2">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-primary-green">Range A</span>
-                <h3 className="text-2xl font-extrabold tracking-tight text-text-dark group-hover:text-primary-green transition-colors duration-200">
-                  Industrial Containers & Spouts
-                </h3>
-                <p className="text-xs text-text-light font-light leading-relaxed">
-                  Heavy-duty jerrycans, retractable spout inserts, flexible pouring tubes, and oil packaging systems engineered for chemical, lubricant, and food-grade containment.
-                </p>
+          <ThreeDCard className="w-full h-full">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="group relative rounded-3xl overflow-hidden bg-white border border-slate-200 text-text-dark shadow-xl flex flex-col justify-between h-full"
+            >
+              <div className="p-8 space-y-6">
+                <div className="space-y-2">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-primary-green">Range A</span>
+                  <h3 className="text-2xl font-extrabold tracking-tight text-text-dark group-hover:text-primary-green transition-colors duration-200">
+                    Industrial Containers & Spouts
+                  </h3>
+                  <p className="text-xs text-text-light font-light leading-relaxed">
+                    Heavy-duty jerrycans, retractable spout inserts, flexible pouring tubes, and oil packaging systems engineered for chemical, lubricant, and food-grade containment.
+                  </p>
+                </div>
+                
+                {/* Product highlights */}
+                <div className="grid grid-cols-2 gap-2 text-[11px] text-text-light">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary-green" />
+                    <span>Retractable Spouts</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary-green" />
+                    <span>Jerry Can Plug Caps</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary-green" />
+                    <span>Flexible Pouring Pipes</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary-green" />
+                    <span>Integrated Air Vents</span>
+                  </div>
+                </div>
               </div>
-              
-              {/* Product highlights */}
-              <div className="grid grid-cols-2 gap-2 text-[11px] text-text-light">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary-green" />
-                  <span>Retractable Spouts</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary-green" />
-                  <span>Jerry Can Plug Caps</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary-green" />
-                  <span>Flexible Pouring Pipes</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary-green" />
-                  <span>Integrated Air Vents</span>
-                </div>
+
+              {/* Image display */}
+              <div className="h-64 relative w-full overflow-hidden bg-slate-50 border-t border-slate-200">
+                <Image
+                  src="/images/products_jerrycans_spouts.png"
+                  alt="Industrial Containers & Spouts"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-85" />
               </div>
-            </div>
 
-            {/* Image display */}
-            <div className="h-64 relative w-full overflow-hidden bg-slate-50 border-t border-slate-200">
-              <Image
-                src="/images/products_jerrycans_spouts.png"
-                alt="Industrial Containers & Spouts"
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-85" />
-            </div>
-
-            <div className="p-6 bg-slate-50 border-t border-slate-100">
-              <button
-                onClick={() => handleExplore('spout')}
-                className="w-full py-3 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-primary-green text-xs font-semibold text-text-dark tracking-wide transition-all duration-300 cursor-pointer"
-              >
-                Explore Spout & Container Range
-              </button>
-            </div>
-          </motion.div>
+              <div className="p-6 bg-slate-50 border-t border-slate-100">
+                <button
+                  onClick={() => handleExplore('spout')}
+                  className="w-full py-3 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-primary-green text-xs font-semibold text-text-dark tracking-wide transition-all duration-300 cursor-pointer"
+                >
+                  Explore Spout & Container Range
+                </button>
+              </div>
+            </motion.div>
+          </ThreeDCard>
 
           {/* Right: Caps & Closures (Always White Background Theme) */}
-          <motion.div
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="group relative rounded-3xl overflow-hidden bg-white border border-slate-200 text-text-dark shadow-xl flex flex-col justify-between"
-          >
-            <div className="p-8 space-y-6">
-              <div className="space-y-2">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-primary-blue">Range B</span>
-                <h3 className="text-2xl font-extrabold tracking-tight text-text-dark group-hover:text-primary-blue transition-colors duration-200">
-                  Precision Caps & Closures
-                </h3>
-                <p className="text-xs text-text-light font-light leading-relaxed">
-                  An extensive collection of colorful continuous thread screw caps, child-resistant lids, flip-tops, custom handles, and specialty lining wads catering to global markets.
-                </p>
+          <ThreeDCard className="w-full h-full">
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="group relative rounded-3xl overflow-hidden bg-white border border-slate-200 text-text-dark shadow-xl flex flex-col justify-between h-full"
+            >
+              <div className="p-8 space-y-6">
+                <div className="space-y-2">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-primary-blue">Range B</span>
+                  <h3 className="text-2xl font-extrabold tracking-tight text-text-dark group-hover:text-primary-blue transition-colors duration-200">
+                    Precision Caps & Closures
+                  </h3>
+                  <p className="text-xs text-text-light font-light leading-relaxed">
+                    An extensive collection of colorful continuous thread screw caps, child-resistant lids, flip-tops, custom handles, and specialty lining wads catering to global markets.
+                  </p>
+                </div>
+                
+                {/* Product highlights */}
+                <div className="grid grid-cols-2 gap-2 text-[11px] text-text-light">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary-blue" />
+                    <span>Flip-Top Dispensers</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary-blue" />
+                    <span>Tamper-Evident Rings</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary-blue" />
+                    <span>Plastic Carrying Handles</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-primary-blue" />
+                    <span>Pharma-Grade Lids</span>
+                  </div>
+                </div>
               </div>
-              
-              {/* Product highlights */}
-              <div className="grid grid-cols-2 gap-2 text-[11px] text-text-light">
-                <div className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary-blue" />
-                  <span>Flip-Top Dispensers</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary-blue" />
-                  <span>Tamper-Evident Rings</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary-blue" />
-                  <span>Plastic Carrying Handles</span>
-                </div>
-                <div className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-primary-blue" />
-                  <span>Pharma-Grade Lids</span>
-                </div>
+
+              {/* Image display */}
+              <div className="h-64 relative w-full overflow-hidden bg-slate-50 border-t border-slate-200">
+                <Image
+                  src="/images/products_caps_closures.png"
+                  alt="Precision Caps & Closures"
+                  fill
+                  className="object-cover transition-transform duration-700 group-hover:scale-105"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-85" />
               </div>
-            </div>
 
-            {/* Image display */}
-            <div className="h-64 relative w-full overflow-hidden bg-slate-50 border-t border-slate-200">
-              <Image
-                src="/images/products_caps_closures.png"
-                alt="Precision Caps & Closures"
-                fill
-                className="object-cover transition-transform duration-700 group-hover:scale-105"
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-transparent opacity-85" />
-            </div>
-
-            <div className="p-6 bg-slate-50 border-t border-slate-100">
-              <button
-                onClick={() => handleExplore('screw-cap')}
-                className="w-full py-3 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-primary-blue text-xs font-semibold text-text-dark tracking-wide transition-all duration-300 cursor-pointer"
-              >
-                Explore Cap & Closure Range
-              </button>
-            </div>
-          </motion.div>
+              <div className="p-6 bg-slate-50 border-t border-slate-100">
+                <button
+                  onClick={() => handleExplore('screw-cap')}
+                  className="w-full py-3 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-primary-blue text-xs font-semibold text-text-dark tracking-wide transition-all duration-300 cursor-pointer"
+                >
+                  Explore Cap & Closure Range
+                </button>
+              </div>
+            </motion.div>
+          </ThreeDCard>
         </div>
 
       </div>

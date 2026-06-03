@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Image from 'next/image';
+import { ThreeDCard } from './ThreeDCard';
 import {
   Droplet,
   GlassWater,
@@ -182,26 +183,27 @@ export default function IndustriesSection() {
           className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
         >
           {industries.map((ind) => (
-            <motion.div
-              key={ind.name}
-              variants={itemVariants}
-              className="group glass-card rounded-2xl p-6 flex flex-col items-center text-center space-y-4 hover:shadow-xl hover:shadow-primary-blue/5 dark:hover:shadow-primary-green/5 dark:hover:border-primary-green/20 hover:border-primary-blue/20"
-            >
-              {/* Icon wrap */}
-              <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${ind.color} flex items-center justify-center transition-all duration-300 group-hover:rotate-6 group-hover:scale-110 shadow-inner`}>
-                <ind.icon className="w-7 h-7" />
-              </div>
+            <ThreeDCard key={ind.name} className="w-full h-full">
+              <motion.div
+                variants={itemVariants}
+                className="group glass-card rounded-2xl p-6 flex flex-col items-center text-center space-y-4 hover:shadow-xl hover:shadow-primary-blue/5 dark:hover:shadow-primary-green/5 dark:hover:border-primary-green/20 hover:border-primary-blue/20 h-full"
+              >
+                {/* Icon wrap */}
+                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${ind.color} flex items-center justify-center transition-all duration-300 group-hover:rotate-6 group-hover:scale-110 shadow-inner`}>
+                  <ind.icon className="w-7 h-7" />
+                </div>
 
-              {/* Title */}
-              <h3 className="text-base font-bold text-text-dark dark:text-white group-hover:text-primary-blue dark:group-hover:text-primary-green transition-colors duration-200">
-                {ind.name}
-              </h3>
+                {/* Title */}
+                <h3 className="text-base font-bold text-text-dark dark:text-white group-hover:text-primary-blue dark:group-hover:text-primary-green transition-colors duration-200">
+                  {ind.name}
+                </h3>
 
-              {/* Description */}
-              <p className="text-xs text-text-light dark:text-slate-400 font-light leading-relaxed">
-                {ind.description}
-              </p>
-            </motion.div>
+                {/* Description */}
+                <p className="text-xs text-text-light dark:text-slate-400 font-light leading-relaxed">
+                  {ind.description}
+                </p>
+              </motion.div>
+            </ThreeDCard>
           ))}
         </motion.div>
 
