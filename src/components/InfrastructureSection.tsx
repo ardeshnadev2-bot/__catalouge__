@@ -58,10 +58,13 @@ export default function InfrastructureSection() {
   };
  
   return (
-    <section id="infrastructure" className="py-20 lg:py-28 relative overflow-hidden z-10">
-      {/* Background glow ambient details */}
-      <div className="absolute top-1/3 right-0 w-[400px] h-[400px] bg-primary-blue/5 dark:bg-primary-blue/2 rounded-full blur-[100px] pointer-events-none -z-10" />
-      <div className="absolute bottom-1/3 left-0 w-[400px] h-[400px] bg-primary-green/5 dark:bg-primary-green/2 rounded-full blur-[100px] pointer-events-none -z-10" />
+    <section
+      id="infrastructure"
+      className="py-20 lg:py-28 relative overflow-hidden bg-gradient-to-b from-blue-50/20 via-transparent to-transparent dark:from-slate-950/40 dark:via-slate-900/20 dark:to-transparent z-10"
+    >
+      {/* Decorative background glows */}
+      <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] bg-[#40A4D6]/10 rounded-full blur-[80px] pointer-events-none -z-10" />
+      <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-[#6EC482]/10 rounded-full blur-[100px] pointer-events-none -z-10" />
  
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24">
         

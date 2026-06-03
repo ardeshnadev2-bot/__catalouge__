@@ -38,9 +38,13 @@ const testimonialsData: Testimonial[] = [
 
 export default function Testimonials() {
   return (
-    <section id="testimonials" className="py-20 lg:py-24 bg-transparent text-slate-900 dark:text-white relative overflow-hidden z-10">
-      {/* Background radial glow */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(224,242,254,0.3),rgba(255,255,255,0))] dark:bg-[radial-gradient(ellipse_at_center,rgba(15,23,42,0.4),rgba(9,14,26,0))] -z-10" />
+    <section
+      id="testimonials"
+      className="py-20 lg:py-24 bg-gradient-to-b from-blue-50/40 via-transparent to-transparent dark:from-slate-950 dark:via-slate-900/60 dark:to-transparent text-slate-900 dark:text-white relative overflow-hidden z-10"
+    >
+      {/* Decorative background glows */}
+      <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] bg-[#40A4D6]/10 rounded-full blur-[80px] pointer-events-none -z-10" />
+      <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-[#6EC482]/10 rounded-full blur-[100px] pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         
