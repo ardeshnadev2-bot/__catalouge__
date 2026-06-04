@@ -92,21 +92,17 @@ export function Navbar() {
     const initialHash = window.location.hash;
     if (initialHash) {
       const targetId = initialHash.replace('#', '');
-      if (targetId !== 'home') { // Don't scroll on load if it's already 'home'
-        const element = document.getElementById(targetId);
-        if (element) {
-          setActiveSection(targetId);
-          isScrollingToRef.current = true;
-          
-          setTimeout(() => {
-            element.scrollIntoView({ behavior: 'auto' }); // Instant snap instead of scrolling the whole site
-            scrollTimeoutRef.current = setTimeout(() => {
-              isScrollingToRef.current = false;
-            }, 100);
-          }, 100);
-        }
-      } else {
-        setActiveSection('home');
+      const element = document.getElementById(targetId);
+      if (element) {
+        setActiveSection(targetId);
+        isScrollingToRef.current = true;
+        
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+          scrollTimeoutRef.current = setTimeout(() => {
+            isScrollingToRef.current = false;
+          }, 1000);
+        }, 300);
       }
     }
 
