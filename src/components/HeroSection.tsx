@@ -47,14 +47,20 @@ function AnimatedCounter({ value, duration = 2 }: { value: string; duration?: nu
 }
 
 export default function HeroSection() {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const { currentTarget, clientX, clientY } = e;
+    const { left, top } = currentTarget.getBoundingClientRect();
+    setMousePosition({ x: clientX - left, y: clientY - top });
+  };
+
   const handleScrollTo = (id: string) => {
-    // Dispatch scroll event to notify components and lock scrollspy
     window.dispatchEvent(new CustomEvent('scroll-to-section', { detail: { targetId: id } }));
 
     const element = document.getElementById(id);
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
-      // Update URL hash without polluting browser history back stack
       window.history.replaceState(null, '', '#' + id);
     }
   };
@@ -62,8 +68,60 @@ export default function HeroSection() {
   return (
     <section
       id="home"
+      onMouseMove={handleMouseMove}
       className="relative min-h-screen flex items-center pt-24 pb-12 lg:pt-32 lg:pb-20 overflow-hidden bg-gradient-to-b from-blue-50/20 via-transparent to-transparent dark:from-slate-950/40 dark:via-slate-900/20 dark:to-transparent z-10"
     >
+      {/* Cap Pattern Overlay background */}
+      <div className="absolute inset-0 cap-pattern-overlay opacity-30 pointer-events-none -z-20" />
+
+      {/* Mouse following glow spotlight */}
+      <div
+        className="absolute pointer-events-none -z-10 w-[450px] h-[450px] bg-primary-blue/15 dark:bg-primary-green/10 rounded-full blur-[120px] transition-all duration-300 ease-out"
+        style={{
+          left: `${mousePosition.x - 225}px`,
+          top: `${mousePosition.y - 225}px`,
+        }}
+      />
+
+      {/* Floating static decorative Cap SVGs */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none -z-10">
+        <motion.div
+          animate={{
+            y: [-15, 15, -15],
+            rotate: [0, 360],
+          }}
+          transition={{
+            duration: 15,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute top-[20%] right-[10%] opacity-20 dark:opacity-30 text-primary-blue"
+        >
+          <svg width="45" height="45" viewBox="0 0 100 100" fill="currentColor">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="8" strokeDasharray="6,4" />
+            <circle cx="50" cy="50" r="30" />
+          </svg>
+        </motion.div>
+        
+        <motion.div
+          animate={{
+            y: [20, -20, 20],
+            rotate: [360, 0],
+          }}
+          transition={{
+            duration: 20,
+            repeat: Infinity,
+            ease: "easeInOut"
+          }}
+          className="absolute bottom-[25%] left-[8%] opacity-15 dark:opacity-20 text-primary-green"
+        >
+          <svg width="55" height="55" viewBox="0 0 100 100" fill="currentColor">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="currentColor" strokeWidth="10" strokeDasharray="8,6" />
+            <circle cx="50" cy="50" r="25" fill="none" stroke="currentColor" strokeWidth="6" />
+          </svg>
+        </motion.div>
+      </div>
+
       {/* Decorative background glows */}
       <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] bg-primary-blue/10 rounded-full blur-[80px] pointer-events-none -z-10" />
       <div className="absolute bottom-1/4 right-1/4 w-[350px] h-[350px] bg-primary-green/10 rounded-full blur-[100px] pointer-events-none -z-10" />
@@ -74,7 +132,7 @@ export default function HeroSection() {
           {/* Text Content Block */}
           <div className="lg:col-span-7 space-y-8 text-center lg:text-left">
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
               className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary-blue/10 dark:bg-primary-blue/20 text-primary-blue dark:text-accent-blue text-xs font-semibold uppercase tracking-wider"
@@ -84,20 +142,20 @@ export default function HeroSection() {
             </motion.div>
 
             <motion.h1
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.7, delay: 0.1 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
               className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-text-dark dark:text-white leading-[1.1]"
             >
               Innovative{' '}
-              <span className="bg-gradient-to-r from-primary-blue via-primary-blue to-primary-green bg-clip-text text-transparent dark:from-accent-blue dark:to-primary-green">
+              <span className="bg-gradient-to-r from-primary-blue via-accent-blue to-primary-green bg-clip-text text-transparent">
                 Closure Solutions
               </span>{' '}
               for Every Industry
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className="text-lg text-text-light dark:text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed font-light"
@@ -107,37 +165,41 @@ export default function HeroSection() {
 
             {/* CTA Buttons */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4"
             >
-              <a
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
                 href="#products"
                 onClick={(e) => {
                   e.preventDefault();
                   handleScrollTo('products');
                 }}
-                className="flex items-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-primary-blue to-primary-green hover:shadow-lg hover:shadow-primary-blue/20 text-white font-semibold transition-all duration-300 transform hover:-translate-y-0.5 group w-full sm:w-auto justify-center"
+                className="flex items-center gap-2 px-8 py-3.5 rounded-full bg-gradient-to-r from-primary-blue to-primary-green hover:shadow-lg hover:shadow-primary-blue/20 text-white font-semibold transition-all duration-300 btn-shine group w-full sm:w-auto justify-center cursor-pointer"
               >
                 Explore Products
                 <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
-              </a>
-              <a
+              </motion.a>
+              <motion.a
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.98 }}
                 href="#contact"
                 onClick={(e) => {
                   e.preventDefault();
                   handleScrollTo('contact');
                 }}
-                className="flex items-center gap-1 px-8 py-3.5 rounded-full glass-card hover:bg-slate-100 dark:hover:bg-slate-800 text-text-dark dark:text-white font-semibold transition-all duration-300 w-full sm:w-auto justify-center"
+                className="flex items-center gap-1 px-8 py-3.5 rounded-full glass-card hover:bg-slate-100 dark:hover:bg-slate-800 text-text-dark dark:text-white font-semibold transition-all duration-300 w-full sm:w-auto justify-center cursor-pointer"
               >
                 Contact Us
-              </a>
+              </motion.a>
             </motion.div>
 
             {/* Mini Statistics Grid */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.4 }}
               className="grid grid-cols-2 sm:grid-cols-4 gap-6 pt-8 border-t border-slate-100 dark:border-slate-800/80"

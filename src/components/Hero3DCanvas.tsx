@@ -94,25 +94,25 @@ function BottleCap({ color, position, speed, scale }: CapProps) {
 export default function Hero3DCanvas() {
   const caps: CapProps[] = [
     {
-      color: '#40A4D6', // Brand Blue
+      color: '#1097D5', // Brand Blue
       position: [1.8, 0.8, -1],
       speed: { x: 0.002, y: 0.005, driftSpeed: 0.8 },
       scale: 1.1,
     },
     {
-      color: '#6EC482', // Brand Green
+      color: '#82B91A', // Brand Green
       position: [-2.2, 0.5, -2],
       speed: { x: 0.004, y: 0.003, driftSpeed: 1.1 },
       scale: 0.9,
     },
     {
-      color: '#70C5E8', // Light Blue Accent
+      color: '#4EC5F1', // Light Blue Accent
       position: [0.5, -1.2, -0.5],
       speed: { x: 0.003, y: 0.004, driftSpeed: 0.9 },
       scale: 0.8,
     },
     {
-      color: '#9CE0B0', // Light Green Accent
+      color: '#A5DE38', // Light Green Accent
       position: [-0.8, 1.4, -2.5],
       speed: { x: 0.002, y: 0.006, driftSpeed: 0.7 },
       scale: 0.7,
@@ -135,8 +135,8 @@ export default function Hero3DCanvas() {
         <directionalLight position={[-5, -2, 2]} intensity={0.5} />
         
         {/* Colorful rim highlights */}
-        <pointLight position={[2, -2, -3]} color="#40A4D6" intensity={1.5} />
-        <pointLight position={[-3, 3, -2]} color="#6EC482" intensity={1.2} />
+        <pointLight position={[2, -2, -3]} color="#1097D5" intensity={1.5} />
+        <pointLight position={[-3, 3, -2]} color="#82B91A" intensity={1.2} />
 
         {caps.map((cap, i) => (
           <BottleCap key={i} {...cap} />

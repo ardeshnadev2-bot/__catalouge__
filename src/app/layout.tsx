@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Outfit, Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { ProductBackgroundCanvas } from "@/components/ProductBackgroundCanvas";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -55,6 +56,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans">
         <ThemeProvider>
+          <ProductBackgroundCanvas />
           {children}
         </ThemeProvider>
       </body>

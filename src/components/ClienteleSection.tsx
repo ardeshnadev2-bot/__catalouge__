@@ -135,41 +135,52 @@ export default function ClienteleSection() {
           </motion.p>
         </div>
 
-        {/* Clientele Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-50px' }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"
-        >
-          {clients.map((client) => (
-            <motion.div
-              key={client.name}
-              variants={itemVariants}
-              whileHover={{ 
-                y: -5,
-                transition: { duration: 0.2, ease: 'easeOut' }
-              }}
-              className="group glass-card rounded-2xl p-6 border border-slate-200/40 dark:border-slate-800/40 flex items-center gap-5 hover:shadow-xl hover:shadow-primary-blue/5 dark:hover:shadow-primary-green/5 dark:hover:border-primary-green/20 hover:border-primary-blue/20 transition-all duration-300"
-            >
-              {/* Brand Logo Wrapper */}
-              <div className="w-16 h-16 rounded-xl bg-slate-50/50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-850 flex items-center justify-center transition-all duration-300 group-hover:scale-110 group-hover:bg-white dark:group-hover:bg-slate-900">
-                {client.logo}
-              </div>
+        {/* Ticker Carousel Frame */}
+        <div className="relative w-full overflow-hidden py-6">
+          {/* Fading Edge Overlays */}
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-white via-white/80 to-transparent dark:from-[#050811] dark:via-[#050811]/80 dark:to-transparent z-20 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-white via-white/80 to-transparent dark:from-[#050811] dark:via-[#050811]/80 dark:to-transparent z-20 pointer-events-none" />
 
-              {/* Brand Info */}
-              <div className="space-y-1.5">
-                <h3 className="text-base font-bold text-text-dark dark:text-white transition-colors duration-200 group-hover:text-primary-blue dark:group-hover:text-primary-green">
-                  {client.name}
-                </h3>
-                <span className={`inline-flex px-2 py-0.5 rounded text-[10px] font-medium ${client.badgeColor}`}>
-                  {client.industry}
-                </span>
+          {/* Scrolling Track */}
+          <div className="ticker-track gap-8 flex">
+            {[...clients, ...clients, ...clients, ...clients].map((client, index) => (
+              <div
+                key={client.name + '-' + index}
+                className="group w-72 md:w-80 shrink-0 glass-card rounded-2xl p-5 border border-slate-200/40 dark:border-slate-800/40 flex items-center gap-5 hover:shadow-xl hover:shadow-primary-blue/20 dark:hover:shadow-primary-green/20 hover:border-primary-blue/30 dark:hover:border-primary-green/30 transition-all duration-300"
+              >
+                {/* Brand Logo Wrapper with grayscale-to-color hover */}
+                <div className="w-14 h-14 rounded-xl bg-slate-50/50 dark:bg-slate-900/50 border border-slate-100 dark:border-slate-850 flex items-center justify-center transition-all duration-300 group-hover:scale-105 group-hover:bg-white dark:group-hover:bg-slate-900 filter grayscale group-hover:grayscale-0">
+                  {client.logo}
+                </div>
+
+                {/* Brand Info */}
+                <div className="space-y-1">
+                  <h3 className="text-sm font-bold text-text-dark dark:text-white transition-colors duration-200 group-hover:text-primary-blue dark:group-hover:text-primary-green">
+                    {client.name}
+                  </h3>
+                  <span className={`inline-flex px-2 py-0.5 rounded text-[9px] font-semibold ${client.badgeColor}`}>
+                    {client.industry}
+                  </span>
+                </div>
               </div>
-            </motion.div>
-          ))}
-        </motion.div>
+            ))}
+          </div>
+
+          <style dangerouslySetInnerHTML={{__html: `
+            @keyframes scrollTicker {
+              0% { transform: translateX(0); }
+              100% { transform: translateX(-25%); }
+            }
+            .ticker-track {
+              display: flex;
+              width: max-content;
+              animation: scrollTicker 35s linear infinite;
+            }
+            .ticker-track:hover {
+              animation-play-state: paused;
+            }
+          `}} />
+        </div>
       </div>
     </section>
   );

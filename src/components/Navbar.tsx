@@ -4,6 +4,7 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { Menu, X, ArrowUpRight } from 'lucide-react';
 import { ThemeToggle } from './ThemeToggle';
+import { motion } from 'framer-motion';
 
 const navLinks = [
   { name: 'Home', href: '#home' },
@@ -145,9 +146,11 @@ export function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <div className="flex-shrink-0">
-            <a href="#home" onClick={(e) => handleLinkClick(e, '#home')} className="flex items-center">
-              <div className="relative h-12 w-32 bg-white dark:bg-white rounded-lg p-1.5 transition-transform duration-300 hover:scale-105">
+          <div className="flex-shrink-0 relative group">
+            {/* Soft background glow */}
+            <div className="absolute -inset-1.5 bg-gradient-to-r from-primary-blue to-primary-green rounded-xl blur opacity-30 group-hover:opacity-60 transition duration-500" />
+            <a href="#home" onClick={(e) => handleLinkClick(e, '#home')} className="relative flex items-center">
+              <div className="relative h-12 w-32 bg-white rounded-lg p-1.5 transition-transform duration-300 hover:scale-105">
                 <Image
                   src="/images/logo.png"
                   alt="SV Closures Logo"
@@ -168,18 +171,23 @@ export function Navbar() {
                   key={link.name}
                   href={link.href}
                   onClick={(e) => handleLinkClick(e, link.href)}
-                  className={`px-3 py-2 text-sm font-medium transition-all duration-200 relative group ${
+                  className={`px-3 py-2 text-sm font-semibold transition-all duration-200 relative group ${
                     active
-                      ? 'text-primary-blue dark:text-primary-green font-semibold'
+                      ? 'text-primary-blue dark:text-primary-green'
                       : 'text-text-dark dark:text-slate-300 hover:text-primary-blue dark:hover:text-primary-green'
                   }`}
                 >
-                  {link.name}
-                  <span
-                    className={`absolute bottom-0 left-3 right-3 h-[2px] bg-primary-green transition-transform duration-300 origin-left ${
-                      active ? 'scale-x-100' : 'scale-x-0 group-hover:scale-x-100'
-                    }`}
-                  />
+                  <span className="relative z-10">{link.name}</span>
+                  {active && (
+                    <motion.span
+                      layoutId="activeNavIndicator"
+                      className="absolute bottom-0 left-3 right-3 h-[2.5px] bg-gradient-to-r from-primary-blue to-primary-green rounded-full"
+                      transition={{ type: 'spring', stiffness: 380, damping: 30 }}
+                    />
+                  )}
+                  {!active && (
+                    <span className="absolute bottom-0 left-3 right-3 h-[2px] bg-primary-blue/30 dark:bg-primary-green/30 scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left" />
+                  )}
                 </a>
               );
             })}
@@ -188,15 +196,17 @@ export function Navbar() {
           {/* Theme Toggle & Contact Button */}
           <div className="hidden lg:flex items-center space-x-4">
             <ThemeToggle />
-            <a
+            <motion.a
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.98 }}
               href="#contact"
               onClick={(e) => handleLinkClick(e, '#contact')}
-              className="flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary-blue to-primary-green hover:from-primary-green hover:to-primary-blue text-white text-sm font-semibold tracking-wide shadow-md shadow-primary-blue/20 dark:shadow-primary-green/10 hover:shadow-lg transition-all duration-300 group"
+              className="flex items-center gap-1.5 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary-blue to-primary-green hover:from-primary-green hover:to-primary-blue text-white text-sm font-semibold tracking-wide shadow-md shadow-primary-blue/20 dark:shadow-primary-green/10 hover:shadow-lg transition-all duration-300 btn-shine group"
               id="nav-contact-btn"
             >
               Contact Us
               <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </a>
+            </motion.a>
           </div>
 
           {/* Mobile menu and toggle */}

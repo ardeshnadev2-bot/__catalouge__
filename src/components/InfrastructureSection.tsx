@@ -2,7 +2,39 @@
  
 import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
+import { CheckCircle2, ChevronLeft, ChevronRight, Leaf, ShieldCheck, Factory, Award } from 'lucide-react';
+import { motion } from 'framer-motion';
+
+// Dynamic stat counter utility
+function AnimatedCounter({ value, duration = 1.5 }: { value: string; duration?: number }) {
+  const [count, setCount] = useState(0);
+  const numericValue = parseInt(value);
+  const suffix = value.replace(numericValue.toString(), '');
+
+  useEffect(() => {
+    let start = 0;
+    const end = numericValue;
+    if (isNaN(end)) return;
+    
+    const stepTime = Math.abs(Math.floor((duration * 1000) / end));
+    const timer = setInterval(() => {
+      start += 1;
+      setCount(start);
+      if (start >= end) {
+        clearInterval(timer);
+      }
+    }, Math.max(stepTime, 20));
+
+    return () => clearInterval(timer);
+  }, [numericValue, duration]);
+
+  return (
+    <span>
+      {count}
+      {suffix}
+    </span>
+  );
+}
  
 const carouselImages = [
   {
@@ -121,35 +153,69 @@ export default function InfrastructureSection() {
               With advanced injection and blow molding capabilities and an in-house tool room for mold development, we provide end-to-end manufacturing solutions. From concept to production, we bring your ideas to life with precision and efficiency.
             </p>
             
-            <div className="space-y-4 pt-2">
+            {/* Vertical Manufacturing Timeline */}
+            <div className="relative border-l-2 border-slate-200/60 dark:border-slate-800/80 ml-3 pl-8 py-2 space-y-8">
+              {/* Animated active path line overlay */}
+              <div className="absolute left-[-2px] top-0 bottom-0 w-[2px] bg-gradient-to-b from-primary-blue via-primary-green to-dark-green rounded-full" />
               
-              <div className="flex gap-4">
-                <div className="w-5 h-5 rounded-full bg-orange-600/10 flex items-center justify-center shrink-0 mt-0.5">
-                  <CheckCircle2 className="w-4 h-4 text-orange-600" />
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="relative"
+              >
+                {/* Node icon dot */}
+                <div className="absolute -left-[45px] w-8 h-8 rounded-full bg-white dark:bg-slate-900 border-2 border-primary-blue flex items-center justify-center shadow-md">
+                  <CheckCircle2 className="w-4 h-4 text-primary-blue" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-text-dark dark:text-white">Custom Mold Development</h4>
+                  <h4 className="text-sm font-bold text-text-dark dark:text-white flex items-center gap-2">
+                    Custom Mold Development 
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary-blue/10 text-primary-blue font-semibold">
+                      <AnimatedCounter value="150" />+ Molds
+                    </span>
+                  </h4>
                   <p className="text-xs text-text-light dark:text-slate-400 font-light mt-0.5 leading-relaxed">
                     We design and manufacture high-quality molds tailored to your unique product requirements.
                   </p>
                 </div>
-              </div>
- 
-              <div className="flex gap-4">
-                <div className="w-5 h-5 rounded-full bg-orange-600/10 flex items-center justify-center shrink-0 mt-0.5">
-                  <CheckCircle2 className="w-4 h-4 text-orange-600" />
+              </motion.div>
+  
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="relative"
+              >
+                {/* Node icon dot */}
+                <div className="absolute -left-[45px] w-8 h-8 rounded-full bg-white dark:bg-slate-900 border-2 border-primary-green flex items-center justify-center shadow-md">
+                  <CheckCircle2 className="w-4 h-4 text-primary-green" />
                 </div>
                 <div>
-                  <h4 className="text-sm font-bold text-text-dark dark:text-white">Injection & Blow Molding</h4>
+                  <h4 className="text-sm font-bold text-text-dark dark:text-white flex items-center gap-2">
+                    Injection & Blow Molding
+                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-primary-green/10 text-primary-green font-semibold">
+                      <AnimatedCounter value="20" />M+ Monthly
+                    </span>
+                  </h4>
                   <p className="text-xs text-text-light dark:text-slate-400 font-light mt-0.5 leading-relaxed">
                     Our advanced machinery enables the production of a wide range of plastic components with superior quality.
                   </p>
                 </div>
-              </div>
- 
-              <div className="flex gap-4">
-                <div className="w-5 h-5 rounded-full bg-orange-600/10 flex items-center justify-center shrink-0 mt-0.5">
-                  <CheckCircle2 className="w-4 h-4 text-orange-600" />
+              </motion.div>
+  
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                className="relative"
+              >
+                {/* Node icon dot */}
+                <div className="absolute -left-[45px] w-8 h-8 rounded-full bg-white dark:bg-slate-900 border-2 border-dark-green flex items-center justify-center shadow-md">
+                  <CheckCircle2 className="w-4 h-4 text-dark-green" />
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-text-dark dark:text-white">Versatile Manufacturing</h4>
@@ -157,11 +223,18 @@ export default function InfrastructureSection() {
                     From closures and spouts to specialized plastic parts, we cater to diverse industry needs.
                   </p>
                 </div>
-              </div>
- 
-              <div className="flex gap-4">
-                <div className="w-5 h-5 rounded-full bg-orange-600/10 flex items-center justify-center shrink-0 mt-0.5">
-                  <CheckCircle2 className="w-4 h-4 text-orange-600" />
+              </motion.div>
+  
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="relative"
+              >
+                {/* Node icon dot */}
+                <div className="absolute -left-[45px] w-8 h-8 rounded-full bg-white dark:bg-slate-900 border-2 border-primary-blue flex items-center justify-center shadow-md">
+                  <CheckCircle2 className="w-4 h-4 text-primary-blue" />
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-text-dark dark:text-white">Complete Development Support</h4>
@@ -169,11 +242,18 @@ export default function InfrastructureSection() {
                     We offer expert guidance from design optimization to full-scale production for cost-effective and innovative solutions.
                   </p>
                 </div>
-              </div>
- 
-              <div className="flex gap-4">
-                <div className="w-5 h-5 rounded-full bg-orange-600/10 flex items-center justify-center shrink-0 mt-0.5">
-                  <CheckCircle2 className="w-4 h-4 text-orange-600" />
+              </motion.div>
+  
+              <motion.div 
+                initial={{ opacity: 0, x: -30 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+                className="relative"
+              >
+                {/* Node icon dot */}
+                <div className="absolute -left-[45px] w-8 h-8 rounded-full bg-white dark:bg-slate-900 border-2 border-primary-green flex items-center justify-center shadow-md">
+                  <CheckCircle2 className="w-4 h-4 text-primary-green" />
                 </div>
                 <div>
                   <h4 className="text-sm font-bold text-text-dark dark:text-white">End-to-End Solutions</h4>
@@ -181,8 +261,7 @@ export default function InfrastructureSection() {
                     From mold development to production and final delivery, we manage the entire process to ensure seamless execution and on-time supply.
                   </p>
                 </div>
-              </div>
- 
+              </motion.div>
             </div>
           </div>
  
@@ -217,58 +296,85 @@ export default function InfrastructureSection() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             
             {/* Lab Image 1 */}
-            <div className="group glass-card rounded-3xl overflow-hidden flex flex-col hover:shadow-xl transition-all duration-300">
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
-                <Image
-                  src="/images/testing_chemical.png"
-                  alt="Chemical Compatibility Testing"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+            <motion.div
+              whileHover={{ y: -8 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="group relative glass-card rounded-3xl overflow-hidden flex flex-col hover:shadow-2xl hover:shadow-primary-blue/20 dark:hover:shadow-primary-green/20 p-[1px] bg-gradient-to-b from-primary-blue/15 to-primary-green/15 hover:from-primary-blue/35 hover:to-primary-green/35 duration-300"
+            >
+              <div className="bg-white/90 dark:bg-slate-900/90 rounded-[23px] overflow-hidden flex flex-col h-full">
+                <div className="relative aspect-[4/3] w-full overflow-hidden">
+                  <Image
+                    src="/images/testing_chemical.png"
+                    alt="Chemical Compatibility Testing"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-6 space-y-2 bg-transparent flex-grow">
+                  <h4 className="text-base font-bold text-text-dark dark:text-white">Chemical Compatibility</h4>
+                  <p className="text-xs text-text-light dark:text-slate-400 font-light leading-relaxed">
+                    Closures are submerged in aggressive chemicals (such as Xylene, Toluene, MEK, MIBK) inside testing jars to verify zero material softening, swelling, or active migration.
+                  </p>
+                </div>
               </div>
-              <div className="p-6 space-y-2 bg-white/50 dark:bg-slate-900/40">
-                <h4 className="text-base font-bold text-text-dark dark:text-white">Chemical Compatibility</h4>
-                <p className="text-xs text-text-light dark:text-slate-400 font-light leading-relaxed">
-                  Closures are submerged in aggressive chemicals (such as Xylene, Toluene, MEK, MIBK) inside testing jars to verify zero material softening, swelling, or active migration.
-                </p>
-              </div>
-            </div>
+            </motion.div>
  
             {/* Lab Image 2 */}
-            <div className="group glass-card rounded-3xl overflow-hidden flex flex-col hover:shadow-xl transition-all duration-300">
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
-                <Image
-                  src="/images/testing_pressure.png"
-                  alt="Pressure and Vacuum Leak Testing"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+            <motion.div
+              whileHover={{ y: -8 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="group relative glass-card rounded-3xl overflow-hidden flex flex-col hover:shadow-2xl hover:shadow-primary-blue/20 dark:hover:shadow-primary-green/20 p-[1px] bg-gradient-to-b from-primary-blue/15 to-primary-green/15 hover:from-primary-blue/35 hover:to-primary-green/35 duration-300"
+            >
+              <div className="bg-white/90 dark:bg-slate-900/90 rounded-[23px] overflow-hidden flex flex-col h-full">
+                <div className="relative aspect-[4/3] w-full overflow-hidden">
+                  <Image
+                    src="/images/testing_pressure.png"
+                    alt="Pressure and Vacuum Leak Testing"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-6 space-y-2 bg-transparent flex-grow">
+                  <h4 className="text-base font-bold text-text-dark dark:text-white">Vacuum & Leakage Control</h4>
+                  <p className="text-xs text-text-light dark:text-slate-400 font-light leading-relaxed">
+                    Rigorous vacuum and pressure-tightness checks are performed to ensure closures hold pressure boundaries without gas escaping or liquid leaking under strain.
+                  </p>
+                </div>
               </div>
-              <div className="p-6 space-y-2 bg-white/50 dark:bg-slate-900/40">
-                <h4 className="text-base font-bold text-text-dark dark:text-white">Vacuum & Leakage Control</h4>
-                <p className="text-xs text-text-light dark:text-slate-400 font-light leading-relaxed">
-                  Rigorous vacuum and pressure-tightness checks are performed to ensure closures hold pressure boundaries without gas escaping or liquid leaking under strain.
-                </p>
-              </div>
-            </div>
+            </motion.div>
  
             {/* Lab Image 3 */}
-            <div className="group glass-card rounded-3xl overflow-hidden flex flex-col hover:shadow-xl transition-all duration-300">
-              <div className="relative aspect-[4/3] w-full overflow-hidden">
-                <Image
-                  src="/images/testing_torque.png"
-                  alt="Torque Release Testing"
-                  fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
-                />
+            <motion.div
+              whileHover={{ y: -8 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="group relative glass-card rounded-3xl overflow-hidden flex flex-col hover:shadow-2xl hover:shadow-primary-blue/20 dark:hover:shadow-primary-green/20 p-[1px] bg-gradient-to-b from-primary-blue/15 to-primary-green/15 hover:from-primary-blue/35 hover:to-primary-green/35 duration-300"
+            >
+              <div className="bg-white/90 dark:bg-slate-900/90 rounded-[23px] overflow-hidden flex flex-col h-full">
+                <div className="relative aspect-[4/3] w-full overflow-hidden">
+                  <Image
+                    src="/images/testing_torque.png"
+                    alt="Torque Release Testing"
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                </div>
+                <div className="p-6 space-y-2 bg-transparent flex-grow">
+                  <h4 className="text-base font-bold text-text-dark dark:text-white">Torque Verification</h4>
+                  <p className="text-xs text-text-light dark:text-slate-400 font-light leading-relaxed">
+                    Application torque and unscrewing torque boundaries are verified using automated sensors to guarantee a tight seal that is still easy for consumers to open.
+                  </p>
+                </div>
               </div>
-              <div className="p-6 space-y-2 bg-white/50 dark:bg-slate-900/40">
-                <h4 className="text-base font-bold text-text-dark dark:text-white">Torque Verification</h4>
-                <p className="text-xs text-text-light dark:text-slate-400 font-light leading-relaxed">
-                  Application torque and unscrewing torque boundaries are verified using automated sensors to guarantee a tight seal that is still easy for consumers to open.
-                </p>
-              </div>
-            </div>
+            </motion.div>
  
           </div>
         </div>

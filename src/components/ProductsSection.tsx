@@ -317,16 +317,17 @@ export default function ProductsSection() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
+                whileHover={{ y: -8, transition: { duration: 0.25, ease: 'easeOut' } }}
                 transition={{ duration: 0.3 }}
                 key={prod.id}
-                className="group glass-card rounded-2xl overflow-hidden flex flex-col justify-between hover:shadow-xl hover:shadow-primary-blue/5 dark:hover:shadow-primary-green/5 dark:hover:border-primary-green/20 hover:border-primary-blue/20"
+                className="group glass-card rounded-2xl overflow-hidden flex flex-col justify-between hover:shadow-2xl hover:shadow-primary-blue/20 dark:hover:shadow-primary-green/20 border border-slate-200/50 dark:border-slate-800/50 hover:border-primary-blue/30 dark:hover:border-primary-green/30"
               >
                 {/* Product Image Area */}
                 <div className="h-60 relative w-full bg-slate-100/50 dark:bg-slate-950/20 flex items-center justify-center p-6 overflow-hidden border-b border-slate-100 dark:border-slate-800/80">
                   <div className="absolute inset-0 bg-gradient-to-tr from-primary-blue/5 to-primary-green/5 pointer-events-none" />
                   
                   {prod.image && (
-                    <div className="relative w-44 h-44 transition-transform duration-500 group-hover:scale-110">
+                    <div className="relative w-44 h-44 transition-transform duration-500 group-hover:scale-115">
                       <Image
                         src={prod.image}
                         alt={prod.name}
@@ -381,10 +382,12 @@ export default function ProductsSection() {
 
                   {/* Action Buttons */}
                   <div className="grid grid-cols-2 gap-3 pt-4 border-t border-slate-100 dark:border-slate-800/60">
-                    <button
+                    <motion.button
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
                       onClick={() => handleDownloadPDF(prod)}
                       disabled={downloadingId === prod.id}
-                      className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-semibold text-text-dark dark:text-slate-300 hover:border-primary-blue hover:text-primary-blue dark:hover:text-primary-green dark:hover:border-primary-green transition-all duration-200 disabled:opacity-50"
+                      className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-semibold text-text-dark dark:text-slate-300 hover:border-primary-blue hover:text-primary-blue dark:hover:text-primary-green dark:hover:border-primary-green transition-all duration-200 disabled:opacity-50 btn-shine cursor-pointer"
                     >
                       {downloadingId === prod.id ? (
                         <>
@@ -397,14 +400,16 @@ export default function ProductsSection() {
                           Specs PDF
                         </>
                       )}
-                    </button>
-                    <button
+                    </motion.button>
+                    <motion.button
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
                       onClick={() => handleEnquire(prod.name)}
-                      className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-gradient-to-r from-primary-blue to-primary-green text-white text-xs font-semibold shadow-md shadow-primary-blue/10 hover:shadow-lg transition-all duration-200"
+                      className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl bg-gradient-to-r from-primary-blue to-primary-green text-white text-xs font-semibold shadow-md shadow-primary-blue/10 hover:shadow-lg transition-all duration-200 btn-shine cursor-pointer"
                     >
                       <MessageSquare className="w-3.5 h-3.5" />
                       Enquire Now
-                    </button>
+                    </motion.button>
                   </div>
                 </div>
               </motion.div>

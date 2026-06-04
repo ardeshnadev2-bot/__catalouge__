@@ -218,29 +218,29 @@ export default function GlobalReachMap() {
               const dx = country.coords.x - origin.x;
               const dy = country.coords.y - origin.y;
               const dr = Math.sqrt(dx * dx + dy * dy) * 1.25; // curvature control
-
+              
               return (
                 <g key={`path-${country.name}`}>
-                  {/* Glowing background path */}
+                  {/* Glowing background static path */}
                   <path
                     d={`M${origin.x},${origin.y} A${dr},${dr} 0 0,1 ${country.coords.x},${country.coords.y}`}
                     fill="none"
-                    stroke="#40A4D6"
+                    stroke="#1097D5"
                     strokeWidth="1.5"
-                    strokeOpacity="0.15"
+                    strokeOpacity="0.12"
                   />
-                  {/* Flow Animation Stroke path */}
+                  {/* Flow Animation dash path running along the curve */}
                   <motion.path
                     d={`M${origin.x},${origin.y} A${dr},${dr} 0 0,1 ${country.coords.x},${country.coords.y}`}
                     fill="none"
                     stroke="url(#arc-gradient)"
-                    strokeWidth="2"
+                    strokeWidth="2.5"
                     strokeLinecap="round"
-                    initial={{ strokeDasharray: '0, 1000' }}
-                    animate={{ strokeDasharray: '20, 200' }}
+                    strokeDasharray="15, 120"
+                    animate={{ strokeDashoffset: [0, -135] }}
                     transition={{
                       repeat: Infinity,
-                      duration: 4 + (idx % 3) * 1.5,
+                      duration: 3 + (idx % 3) * 0.8,
                       ease: 'linear',
                     }}
                   />
@@ -252,6 +252,7 @@ export default function GlobalReachMap() {
             {exportDestinations.map((country, idx) => {
               const isOrigin = idx === 0;
               const isHovered = hoveredCountry?.name === country.name;
+              const nodeColor = isOrigin ? '#82B91A' : '#1097D5';
               
               return (
                 <g
@@ -260,22 +261,45 @@ export default function GlobalReachMap() {
                   onMouseEnter={() => setHoveredCountry(country)}
                   onMouseLeave={() => setHoveredCountry(null)}
                 >
-                  {/* Glow Ring under node */}
+                  {/* Sonar Radar concentric pulses */}
+                  {(isOrigin || isHovered) && (
+                    <>
+                      <circle
+                        cx={country.coords.x}
+                        cy={country.coords.y}
+                        r={isOrigin ? 18 : 12}
+                        fill={nodeColor}
+                        fillOpacity="0.2"
+                        className="animate-ping"
+                        style={{ animationDuration: '3s' }}
+                      />
+                      <circle
+                        cx={country.coords.x}
+                        cy={country.coords.y}
+                        r={isOrigin ? 12 : 8}
+                        fill={nodeColor}
+                        fillOpacity="0.3"
+                        className="animate-ping"
+                        style={{ animationDuration: '1.5s' }}
+                      />
+                    </>
+                  )}
+                  {/* Static Hover Glow ring */}
                   <circle
                     cx={country.coords.x}
                     cy={country.coords.y}
-                    r={isOrigin ? 12 : 8}
-                    fill={isOrigin ? '#6EC482' : '#40A4D6'}
-                    fillOpacity="0.2"
-                    className={isOrigin || isHovered ? 'animate-ping' : ''}
+                    r={isOrigin ? 9 : 6}
+                    fill={nodeColor}
+                    fillOpacity={isHovered ? '0.4' : '0.2'}
+                    className="transition-all duration-300"
                   />
                   {/* Center Node Core */}
                   <circle
                     cx={country.coords.x}
                     cy={country.coords.y}
-                    r={isOrigin ? 6 : 4}
-                    fill={isOrigin ? '#6EC482' : '#40A4D6'}
-                    className="transition-all duration-300 group-hover:scale-125"
+                    r={isOrigin ? 5 : 3.5}
+                    fill={nodeColor}
+                    className="transition-all duration-300"
                   />
                 </g>
               );
@@ -284,9 +308,9 @@ export default function GlobalReachMap() {
             {/* Definitions for Gradients */}
             <defs>
               <linearGradient id="arc-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#6EC482" stopOpacity="0.1" />
-                <stop offset="50%" stopColor="#40A4D6" stopOpacity="1" />
-                <stop offset="100%" stopColor="#6EC482" stopOpacity="0.1" />
+                <stop offset="0%" stopColor="#82B91A" stopOpacity="0.1" />
+                <stop offset="50%" stopColor="#1097D5" stopOpacity="1" />
+                <stop offset="100%" stopColor="#82B91A" stopOpacity="0.1" />
               </linearGradient>
             </defs>
           </svg>

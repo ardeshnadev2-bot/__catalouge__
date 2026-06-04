@@ -145,156 +145,185 @@ export default function ContactSection() {
           {/* Contact Inquiry Form (7 columns) */}
           <div className="lg:col-span-7">
             
-            <div className="glass-card rounded-3xl p-8 border border-primary-blue/5 shadow-lg relative">
-              <h3 className="text-xl font-bold text-text-dark dark:text-white mb-6">
-                Request Specifications & Quote
-              </h3>
-              
-              <AnimatePresence mode="wait">
-                {submitted ? (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0, scale: 0.95 }}
-                    className="flex flex-col items-center justify-center text-center py-12 space-y-4"
-                  >
-                    <div className="w-16 h-16 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
-                      <CheckCircle2 className="w-8 h-8" />
-                    </div>
-                    <h4 className="text-lg font-bold text-text-dark dark:text-white">
-                      Inquiry Submitted Successfully
-                    </h4>
-                    <p className="text-xs text-text-light dark:text-slate-400 max-w-xs leading-relaxed">
-                      Thank you for contacting us. A technical packaging representative will review your requirement and reply within 12 business hours.
-                    </p>
-                    <button
-                      onClick={() => setSubmitted(false)}
-                      className="px-6 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors mt-4 text-text-dark dark:text-white"
+            <div className="relative glass-card rounded-3xl p-[1px] bg-gradient-to-b from-primary-blue/15 to-primary-green/15 shadow-2xl">
+              <div className="bg-white/95 dark:bg-slate-950/90 rounded-[23px] p-8 h-full">
+                <h3 className="text-xl font-bold text-text-dark dark:text-white mb-6">
+                  Request Specifications & Quote
+                </h3>
+                
+                <AnimatePresence mode="wait">
+                  {submitted ? (
+                    <motion.div
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.95 }}
+                      className="flex flex-col items-center justify-center text-center py-12 space-y-4"
                     >
-                      Send Another Message
-                    </button>
-                  </motion.div>
-                ) : (
-                  <motion.form
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    onSubmit={handleSubmit}
-                    className="space-y-5"
-                    id="contact-inquiry-form"
-                  >
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <div className="space-y-1.5">
-                        <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400" htmlFor="contact-name">
-                          Full Name *
-                        </label>
+                      <div className="w-16 h-16 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0">
+                        <CheckCircle2 className="w-8 h-8" />
+                      </div>
+                      <h4 className="text-lg font-bold text-text-dark dark:text-white">
+                        Inquiry Submitted Successfully
+                      </h4>
+                      <p className="text-xs text-text-light dark:text-slate-400 max-w-xs leading-relaxed">
+                        Thank you for contacting us. A technical packaging representative will review your requirement and reply within 12 business hours.
+                      </p>
+                      <button
+                        onClick={() => setSubmitted(false)}
+                        className="px-6 py-2 rounded-xl border border-slate-200 dark:border-slate-800 text-xs font-semibold hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors mt-4 text-text-dark dark:text-white"
+                      >
+                        Send Another Message
+                      </button>
+                    </motion.div>
+                  ) : (
+                    <motion.form
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      onSubmit={handleSubmit}
+                      className="space-y-5"
+                      id="contact-inquiry-form"
+                    >
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        {/* Name Input */}
+                        <div className="relative">
+                          <input
+                            type="text"
+                            id="contact-name"
+                            required
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
+                            placeholder=" "
+                            className="peer w-full px-4 pt-6 pb-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 text-sm focus:outline-none focus:border-primary-blue dark:focus:border-primary-green focus:ring-2 focus:ring-primary-blue/20 dark:focus:ring-primary-green/20 text-text-dark dark:text-white transition-all duration-200"
+                          />
+                          <label 
+                            className="absolute left-4 top-1.5 text-[9px] font-bold uppercase tracking-wider text-slate-450 transition-all duration-300 pointer-events-none peer-placeholder-shown:text-xs peer-placeholder-shown:top-4 peer-focus:top-1.5 peer-focus:text-[9px] peer-focus:text-primary-blue dark:peer-focus:text-primary-green select-none"
+                            htmlFor="contact-name"
+                          >
+                            Full Name *
+                          </label>
+                        </div>
+                        
+                        {/* Company Input */}
+                        <div className="relative">
+                          <input
+                            type="text"
+                            id="contact-company"
+                            required
+                            value={company}
+                            onChange={(e) => setCompany(e.target.value)}
+                            placeholder=" "
+                            className="peer w-full px-4 pt-6 pb-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 text-sm focus:outline-none focus:border-primary-blue dark:focus:border-primary-green focus:ring-2 focus:ring-primary-blue/20 dark:focus:ring-primary-green/20 text-text-dark dark:text-white transition-all duration-200"
+                          />
+                          <label 
+                            className="absolute left-4 top-1.5 text-[9px] font-bold uppercase tracking-wider text-slate-450 transition-all duration-300 pointer-events-none peer-placeholder-shown:text-xs peer-placeholder-shown:top-4 peer-focus:top-1.5 peer-focus:text-[9px] peer-focus:text-primary-blue dark:peer-focus:text-primary-green select-none"
+                            htmlFor="contact-company"
+                          >
+                            Company Name *
+                          </label>
+                        </div>
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        {/* Email Input */}
+                        <div className="relative">
+                          <input
+                            type="email"
+                            id="contact-email"
+                            required
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder=" "
+                            className="peer w-full px-4 pt-6 pb-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 text-sm focus:outline-none focus:border-primary-blue dark:focus:border-primary-green focus:ring-2 focus:ring-primary-blue/20 dark:focus:ring-primary-green/20 text-text-dark dark:text-white transition-all duration-200"
+                          />
+                          <label 
+                            className="absolute left-4 top-1.5 text-[9px] font-bold uppercase tracking-wider text-slate-450 transition-all duration-300 pointer-events-none peer-placeholder-shown:text-xs peer-placeholder-shown:top-4 peer-focus:top-1.5 peer-focus:text-[9px] peer-focus:text-primary-blue dark:peer-focus:text-primary-green select-none"
+                            htmlFor="contact-email"
+                          >
+                            Email Address *
+                          </label>
+                        </div>
+
+                        {/* Phone Input */}
+                        <div className="relative">
+                          <input
+                            type="tel"
+                            id="contact-phone"
+                            required
+                            value={phone}
+                            onChange={(e) => setPhone(e.target.value)}
+                            placeholder=" "
+                            className="peer w-full px-4 pt-6 pb-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 text-sm focus:outline-none focus:border-primary-blue dark:focus:border-primary-green focus:ring-2 focus:ring-primary-blue/20 dark:focus:ring-primary-green/20 text-text-dark dark:text-white transition-all duration-200"
+                          />
+                          <label 
+                            className="absolute left-4 top-1.5 text-[9px] font-bold uppercase tracking-wider text-slate-450 transition-all duration-300 pointer-events-none peer-placeholder-shown:text-xs peer-placeholder-shown:top-4 peer-focus:top-1.5 peer-focus:text-[9px] peer-focus:text-primary-blue dark:peer-focus:text-primary-green select-none"
+                            htmlFor="contact-phone"
+                          >
+                            Phone / Mobile *
+                          </label>
+                        </div>
+                      </div>
+
+                      {/* Product Requirement */}
+                      <div className="relative">
                         <input
                           type="text"
-                          id="contact-name"
-                          required
-                          value={name}
-                          onChange={(e) => setName(e.target.value)}
-                          placeholder="Your Name"
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-text-dark dark:text-white transition-colors"
+                          id="contact-product"
+                          value={productRequirement}
+                          onChange={(e) => setProductRequirement(e.target.value)}
+                          placeholder=" "
+                          className="peer w-full px-4 pt-6 pb-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 text-sm focus:outline-none focus:border-primary-blue dark:focus:border-primary-green focus:ring-2 focus:ring-primary-blue/20 dark:focus:ring-primary-green/20 text-text-dark dark:text-white transition-all duration-200"
                         />
-                      </div>
-                      <div className="space-y-1.5">
-                        <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400" htmlFor="contact-company">
-                          Company Name *
+                        <label 
+                          className="absolute left-4 top-1.5 text-[9px] font-bold uppercase tracking-wider text-slate-450 transition-all duration-300 pointer-events-none peer-placeholder-shown:text-xs peer-placeholder-shown:top-4 peer-focus:top-1.5 peer-focus:text-[9px] peer-focus:text-primary-blue dark:peer-focus:text-primary-green select-none"
+                          htmlFor="contact-product"
+                        >
+                          Product Requirement / Category
                         </label>
-                        <input
-                          type="text"
-                          id="contact-company"
-                          required
-                          value={company}
-                          onChange={(e) => setCompany(e.target.value)}
-                          placeholder="Your Company Name"
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-text-dark dark:text-white transition-colors"
-                        />
                       </div>
-                    </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <div className="space-y-1.5">
-                        <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400" htmlFor="contact-email">
-                          Email Address *
+                      {/* Message Details */}
+                      <div className="relative">
+                        <textarea
+                          id="contact-message"
+                          required
+                          value={message}
+                          onChange={(e) => setMessage(e.target.value)}
+                          rows={4}
+                          placeholder=" "
+                          className="peer w-full px-4 pt-6 pb-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 text-sm focus:outline-none focus:border-primary-blue dark:focus:border-primary-green focus:ring-2 focus:ring-primary-blue/20 dark:focus:ring-primary-green/20 text-text-dark dark:text-white transition-all duration-200"
+                        />
+                        <label 
+                          className="absolute left-4 top-1.5 text-[9px] font-bold uppercase tracking-wider text-slate-450 transition-all duration-300 pointer-events-none peer-placeholder-shown:text-xs peer-placeholder-shown:top-4 peer-focus:top-1.5 peer-focus:text-[9px] peer-focus:text-primary-blue dark:peer-focus:text-primary-green select-none"
+                          htmlFor="contact-message"
+                        >
+                          Message Details *
                         </label>
-                        <input
-                          type="email"
-                          id="contact-email"
-                          required
-                          value={email}
-                          onChange={(e) => setEmail(e.target.value)}
-                          placeholder="your.email@company.com"
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-text-dark dark:text-white transition-colors"
-                        />
                       </div>
-                      <div className="space-y-1.5">
-                        <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400" htmlFor="contact-phone">
-                          Phone / Mobile *
-                        </label>
-                        <input
-                          type="tel"
-                          id="contact-phone"
-                          required
-                          value={phone}
-                          onChange={(e) => setPhone(e.target.value)}
-                          placeholder="Country Code + Phone"
-                          className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-text-dark dark:text-white transition-colors"
-                        />
-                      </div>
-                    </div>
 
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400" htmlFor="contact-product">
-                        Product Requirement / Category
-                      </label>
-                      <input
-                        type="text"
-                        id="contact-product"
-                        value={productRequirement}
-                        onChange={(e) => setProductRequirement(e.target.value)}
-                        placeholder="e.g. SV 32mm Press-Fit Spout Caps, Custom Mold size"
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-text-dark dark:text-white transition-colors"
-                      />
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] font-bold uppercase tracking-wider text-slate-400" htmlFor="contact-message">
-                        Message Details *
-                      </label>
-                      <textarea
-                        id="contact-message"
-                        required
-                        value={message}
-                        onChange={(e) => setMessage(e.target.value)}
-                        rows={4}
-                        placeholder="Specify wadding/lining preferences, estimated annual order volume, and destination port..."
-                        className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-800 bg-white/50 dark:bg-slate-900/50 text-sm focus:outline-none focus:border-primary-blue focus:ring-1 focus:ring-primary-blue text-text-dark dark:text-white transition-colors"
-                      />
-                    </div>
-
-                    <button
-                      type="submit"
-                      disabled={loading}
-                      className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-gradient-to-r from-primary-blue to-primary-green hover:shadow-lg hover:shadow-primary-blue/20 text-white font-semibold text-sm transition-all duration-300 disabled:opacity-50"
-                    >
-                      {loading ? (
-                        <>
-                          <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                          Processing Enquiry...
-                        </>
-                      ) : (
-                        <>
-                          <Send className="w-4 h-4" />
-                          Submit Industrial Enquiry
-                        </>
-                      )}
-                    </button>
-                  </motion.form>
-                )}
-              </AnimatePresence>
-
+                      <motion.button
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.98 }}
+                        type="submit"
+                        disabled={loading}
+                        className="w-full flex items-center justify-center gap-2 py-3.5 rounded-xl bg-gradient-to-r from-primary-blue to-primary-green hover:shadow-lg hover:shadow-primary-blue/20 text-white font-semibold text-sm transition-all duration-300 disabled:opacity-50 btn-shine cursor-pointer"
+                      >
+                        {loading ? (
+                          <>
+                            <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                            Processing Enquiry...
+                          </>
+                        ) : (
+                          <>
+                            <Send className="w-4 h-4" />
+                            Submit Industrial Enquiry
+                          </>
+                        )}
+                      </motion.button>
+                    </motion.form>
+                  )}
+                </AnimatePresence>
+              </div>
             </div>
 
           </div>

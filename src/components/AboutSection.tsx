@@ -1,7 +1,37 @@
-'use client';
-
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Cpu, ShieldCheck, Settings, CheckCircle2, Globe, Leaf, Building2 } from 'lucide-react';
+
+// Dynamic stat counter utility
+function AnimatedCounter({ value, duration = 1.5, startVal = 0 }: { value: string; duration?: number; startVal?: number }) {
+  const [count, setCount] = useState(startVal);
+  const numericValue = parseInt(value);
+  const suffix = value.replace(numericValue.toString(), '');
+
+  useEffect(() => {
+    let start = startVal;
+    const end = numericValue;
+    if (isNaN(end)) return;
+    
+    const stepTime = Math.abs(Math.floor((duration * 1000) / (end - startVal)));
+    const timer = setInterval(() => {
+      start += 1;
+      setCount(start);
+      if (start >= end) {
+        clearInterval(timer);
+      }
+    }, Math.max(stepTime, 20));
+
+    return () => clearInterval(timer);
+  }, [numericValue, duration, startVal]);
+
+  return (
+    <span>
+      {count}
+      {suffix}
+    </span>
+  );
+}
 
 const advantages = [
   {
@@ -122,27 +152,33 @@ export default function AboutSection() {
             className="lg:col-span-5 relative"
           >
             {/* Visual Glass Box card */}
-            <div className="relative glass-card rounded-3xl p-8 lg:p-10 border border-primary-blue/10 dark:border-primary-green/10 shadow-xl flex flex-col justify-center overflow-hidden">
-              {/* Grid backdrop */}
-              <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.1))] -z-10 opacity-30 dark:opacity-10" />
-              
-              <div className="space-y-8 relative">
-                <div>
-                  <h3 className="text-4xl font-extrabold text-primary-blue dark:text-primary-green">1998</h3>
-                  <p className="text-sm font-semibold tracking-wider uppercase text-text-dark dark:text-white mt-1">Foundation Year</p>
-                  <p className="text-xs text-text-light dark:text-slate-400 mt-1">Started as a precision molding vendor in Rajkot</p>
-                </div>
-                <div className="w-full h-px bg-slate-200/60 dark:bg-slate-800" />
-                <div>
-                  <h3 className="text-4xl font-extrabold text-primary-blue dark:text-primary-green">100%</h3>
-                  <p className="text-sm font-semibold tracking-wider uppercase text-text-dark dark:text-white mt-1">Leak-Proof Integrity</p>
-                  <p className="text-xs text-text-light dark:text-slate-400 mt-1">100% of our mold geometries undergo computational stress-testing</p>
-                </div>
-                <div className="w-full h-px bg-slate-200/60 dark:bg-slate-800" />
-                <div>
-                  <h3 className="text-4xl font-extrabold text-primary-blue dark:text-primary-green">ISO 9001</h3>
-                  <p className="text-sm font-semibold tracking-wider uppercase text-text-dark dark:text-white mt-1">Quality Certified</p>
-                  <p className="text-xs text-text-light dark:text-slate-400 mt-1">Compliant with food-grade raw materials and international norms</p>
+            <div className="relative glass-card rounded-3xl p-8 lg:p-10 border border-primary-blue/15 dark:border-primary-green/15 shadow-xl flex flex-col justify-center overflow-hidden bg-gradient-to-b from-white/80 to-white/40 dark:from-slate-900/80 dark:to-slate-900/40 p-[1px] bg-gradient-to-b from-primary-blue/10 to-primary-green/10">
+              <div className="bg-white/90 dark:bg-slate-900/90 rounded-[23px] p-8 h-full flex flex-col justify-center relative">
+                {/* Grid backdrop */}
+                <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,rgba(255,255,255,0.1))] -z-10 opacity-30 dark:opacity-10" />
+                
+                <div className="space-y-8 relative">
+                  <div>
+                    <h3 className="text-4xl font-extrabold text-primary-blue dark:text-primary-green">
+                      <AnimatedCounter value="1998" startVal={1980} />
+                    </h3>
+                    <p className="text-sm font-semibold tracking-wider uppercase text-text-dark dark:text-white mt-1">Foundation Year</p>
+                    <p className="text-xs text-text-light dark:text-slate-400 mt-1">Started as a precision molding vendor in Rajkot</p>
+                  </div>
+                  <div className="w-full h-px bg-slate-200/60 dark:bg-slate-800" />
+                  <div>
+                    <h3 className="text-4xl font-extrabold text-primary-blue dark:text-primary-green">
+                      <AnimatedCounter value="100%" />
+                    </h3>
+                    <p className="text-sm font-semibold tracking-wider uppercase text-text-dark dark:text-white mt-1">Leak-Proof Integrity</p>
+                    <p className="text-xs text-text-light dark:text-slate-400 mt-1">100% of our mold geometries undergo computational stress-testing</p>
+                  </div>
+                  <div className="w-full h-px bg-slate-200/60 dark:bg-slate-800" />
+                  <div>
+                    <h3 className="text-4xl font-extrabold text-primary-blue dark:text-primary-green">ISO 9001</h3>
+                    <p className="text-sm font-semibold tracking-wider uppercase text-text-dark dark:text-white mt-1">Quality Certified</p>
+                    <p className="text-xs text-text-light dark:text-slate-400 mt-1">Compliant with food-grade raw materials and international norms</p>
+                  </div>
                 </div>
               </div>
             </div>
