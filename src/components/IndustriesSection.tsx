@@ -313,15 +313,17 @@ export default function IndustriesSection() {
             {/* Decorative background glow */}
             <div className="absolute -inset-1.5 bg-gradient-to-r from-primary-blue to-primary-green rounded-2xl blur opacity-30 group-hover:opacity-50 transition duration-1000 group-hover:duration-200" />
             
-            {/* Framed iframe wrapper */}
+            {/* Framed video wrapper */}
             <div className="relative glass-card rounded-2xl overflow-hidden p-2 bg-slate-100/50 dark:bg-slate-900/50">
               <div className="relative aspect-video w-full rounded-xl overflow-hidden bg-slate-950 shadow-inner">
-                <iframe
-                  src="https://www.youtube.com/embed/XHOmBV4js_E?autoplay=1&mute=1&loop=1&playlist=XHOmBV4js_E&controls=0&showinfo=0&rel=0&modestbranding=1&iv_load_policy=3&disablekb=1"
-                  title="Anjani Closures Production Line"
+                <video
+                  src="/images/machinery_factory.mp4"
                   className="absolute inset-0 w-full h-full object-cover"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  controls={false}
                 />
               </div>
             </div>

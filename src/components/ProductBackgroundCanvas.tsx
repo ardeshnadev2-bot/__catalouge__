@@ -183,14 +183,14 @@ export function ProductBackgroundCanvas() {
       const isDark = document.documentElement.classList.contains('dark') || resolvedTheme === 'dark';
       
       // SVG Colors according to current theme
-      const colBlue = isDark ? 'rgba(78, 197, 241, 0.18)' : 'rgba(16, 151, 213, 0.08)';
-      const colBlueActive = isDark ? 'rgba(78, 197, 241, 0.70)' : 'rgba(16, 151, 213, 0.45)';
-      const colGreen = isDark ? 'rgba(165, 222, 56, 0.15)' : 'rgba(130, 185, 26, 0.08)';
-      const colGreenActive = isDark ? 'rgba(165, 222, 56, 0.70)' : 'rgba(130, 185, 26, 0.45)';
+      const colBlue = isDark ? 'rgba(78, 197, 241, 0.12)' : 'rgba(16, 151, 213, 0.08)';
+      const colBlueActive = isDark ? 'rgba(78, 197, 241, 0.55)' : 'rgba(16, 151, 213, 0.45)';
+      const colGreen = isDark ? 'rgba(165, 222, 56, 0.10)' : 'rgba(130, 185, 26, 0.08)';
+      const colGreenActive = isDark ? 'rgba(165, 222, 56, 0.55)' : 'rgba(130, 185, 26, 0.45)';
       const colGrid = isDark ? 'rgba(255, 255, 255, 0.02)' : 'rgba(0, 0, 0, 0.015)';
-      const colText = isDark ? 'rgba(255, 255, 255, 0.35)' : 'rgba(30, 45, 59, 0.20)';
-      const colTextSub = isDark ? 'rgba(255, 255, 255, 0.22)' : 'rgba(30, 45, 59, 0.12)';
-      const colHighlight = isDark ? 'rgba(245, 166, 35, 0.50)' : 'rgba(245, 166, 35, 0.30)'; // Orange Accent for warning/seal
+      const colText = isDark ? 'rgba(255, 255, 255, 0.25)' : 'rgba(30, 45, 59, 0.20)';
+      const colTextSub = isDark ? 'rgba(255, 255, 255, 0.15)' : 'rgba(30, 45, 59, 0.12)';
+      const colHighlight = isDark ? 'rgba(245, 166, 35, 0.35)' : 'rgba(245, 166, 35, 0.30)'; // Orange Accent for warning/seal
 
       // Draw subtle technical graph grid lines matching CAD styling
       const drawGrid = () => {

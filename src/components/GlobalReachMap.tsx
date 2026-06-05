@@ -15,63 +15,63 @@ interface ExportCountry {
 const exportDestinations: ExportCountry[] = [
   {
     name: 'India (Manufacturing Origin)',
-    coords: { x: 580, y: 310 },
+    coords: { x: 561, y: 184 },
     shippingDays: 'Domestic Hub',
     keyProduct: 'All Products',
     transport: 'Road & Rail Freight',
   },
   {
     name: 'UAE',
-    coords: { x: 480, y: 290 },
+    coords: { x: 448, y: 184 },
     shippingDays: '4-6 Days',
     keyProduct: 'Press-Fit Spouts',
     transport: 'Sea Container (Jebel Ali)',
   },
   {
     name: 'Saudi Arabia',
-    coords: { x: 440, y: 305 },
+    coords: { x: 422, y: 188 },
     shippingDays: '6-8 Days',
     keyProduct: 'Rigid Screw Caps',
     transport: 'Sea Container (Jeddah)',
   },
   {
     name: 'Italy',
-    coords: { x: 340, y: 200 },
+    coords: { x: 400, y: 105 },
     shippingDays: '16-18 Days',
     keyProduct: 'Spout Caps & Handles',
     transport: 'Sea Container (Genoa)',
   },
   {
     name: 'Germany',
-    coords: { x: 320, y: 165 },
+    coords: { x: 400, y: 83 },
     shippingDays: '18-20 Days',
     keyProduct: 'Custom Closures',
     transport: 'Sea Container (Hamburg)',
   },
   {
     name: 'United Kingdom',
-    coords: { x: 260, y: 150 },
+    coords: { x: 365, y: 75 },
     shippingDays: '16-19 Days',
     keyProduct: 'Flip-Top Closures',
     transport: 'Sea Container (Felixstowe)',
   },
   {
     name: 'Sri Lanka',
-    coords: { x: 595, y: 375 },
+    coords: { x: 579, y: 241 },
     shippingDays: '3-4 Days',
     keyProduct: 'Food Grade Caps',
     transport: 'Sea Container (Colombo)',
   },
   {
     name: 'Canada',
-    coords: { x: 120, y: 130 },
+    coords: { x: 186, y: 75 },
     shippingDays: '22-25 Days',
     keyProduct: 'Tamper Evident Closures',
     transport: 'Sea Container (Vancouver)',
   },
   {
     name: 'USA',
-    coords: { x: 90, y: 190 },
+    coords: { x: 186, y: 118 },
     shippingDays: '20-24 Days',
     keyProduct: 'Spout & Flip-Top Caps',
     transport: 'Sea Container (New York / LA)',
@@ -193,22 +193,16 @@ export default function GlobalReachMap() {
             className="w-full h-auto text-slate-300 dark:text-slate-800"
             xmlns="http://www.w3.org/2000/svg"
           >
-            {/* Dotted Stylized Continental Grid for futuristic dashboard look */}
-            <g opacity="0.15">
-              {/* North America Dotted representation */}
-              <circle cx="90" cy="180" r="40" fill="currentColor" />
-              <circle cx="120" cy="140" r="50" fill="currentColor" />
-              <circle cx="150" cy="120" r="30" fill="currentColor" />
-              {/* Europe Dotted */}
-              <circle cx="310" cy="160" r="35" fill="currentColor" />
-              <circle cx="340" cy="200" r="30" fill="currentColor" />
-              {/* Middle East Dotted */}
-              <circle cx="450" cy="280" r="25" fill="currentColor" />
-              {/* India/Asia Dotted */}
-              <circle cx="580" cy="310" r="45" fill="currentColor" />
-              <circle cx="610" cy="330" r="35" fill="currentColor" />
-              <circle cx="650" cy="280" r="60" fill="currentColor" />
-            </g>
+            {/* World Map Background silhouette */}
+            <image
+              href="/images/world_map.svg"
+              x="-15"
+              y="-65"
+              width="830"
+              height="542"
+              className="opacity-[0.06] dark:opacity-[0.04] dark:invert"
+              pointerEvents="none"
+            />
 
             {/* Export Shipping Arc Paths */}
             {exportDestinations.map((country, idx) => {

@@ -332,7 +332,7 @@ export default function ProductsSection() {
                         src={prod.image}
                         alt={prod.name}
                         fill
-                        className="object-contain"
+                        className={`object-contain ${prod.image === '/images/logo.png' ? 'dark:drop-shadow-[0_0_2px_rgba(255,255,255,0.85)]' : ''}`}
                       />
                     </div>
                   )}

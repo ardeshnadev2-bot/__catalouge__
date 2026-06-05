@@ -150,12 +150,12 @@ export function Navbar() {
             {/* Soft background glow */}
             <div className="absolute -inset-1.5 bg-gradient-to-r from-primary-blue to-primary-green rounded-xl blur opacity-30 group-hover:opacity-60 transition duration-500" />
             <a href="#home" onClick={(e) => handleLinkClick(e, '#home')} className="relative flex items-center">
-              <div className="relative h-12 w-32 bg-white rounded-lg p-1.5 transition-transform duration-300 hover:scale-105">
+              <div className="relative h-12 w-32 transition-transform duration-300 hover:scale-105">
                 <Image
                   src="/images/logo.png"
                   alt="SV Closures Logo"
                   fill
-                  className="object-contain p-0.5"
+                  className="object-contain dark:drop-shadow-[0_0_2px_rgba(255,255,255,0.85)]"
                   priority
                 />
               </div>

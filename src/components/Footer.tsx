@@ -44,13 +44,13 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Company Brief */}
           <div className="space-y-6">
-            <div className="bg-white p-2 rounded-lg inline-block shadow-sm">
+            <div className="inline-block transition-transform duration-300 hover:scale-105">
               <Image
                 src="/images/logo.png"
                 alt="SV Closures Logo"
                 width={120}
                 height={45}
-                className="object-contain"
+                className="object-contain dark:drop-shadow-[0_0_2px_rgba(255,255,255,0.85)]"
               />
             </div>
             <p className="text-sm leading-relaxed text-slate-400">
