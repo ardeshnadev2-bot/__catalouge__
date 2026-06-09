@@ -22,7 +22,7 @@ import { WhatsAppButton } from '@/components/WhatsAppButton';
 type ActiveViewType = 'all' | 'home' | 'about' | 'products' | 'industries' | 'infrastructure' | 'sustainability' | 'global-reach' | 'gallery' | 'contact';
 
 export default function Home() {
-  const [activeView, setActiveView] = useState<ActiveViewType>('all');
+  const [activeView, setActiveView] = useState<ActiveViewType>('home');
 
   useEffect(() => {
     const validSections = ['home', 'about', 'products', 'packaging', 'industries', 'infrastructure', 'sustainability', 'global-reach', 'gallery', 'contact'];
@@ -34,7 +34,7 @@ export default function Home() {
         const targetView = hash === 'packaging' ? 'products' : hash;
         setActiveView(targetView as ActiveViewType);
       } else {
-        setActiveView('all');
+        setActiveView('home');
       }
     };
 
@@ -61,7 +61,7 @@ export default function Home() {
           }
         }, 150);
       } else {
-        setActiveView('all');
+        setActiveView('home');
       }
     };
 
