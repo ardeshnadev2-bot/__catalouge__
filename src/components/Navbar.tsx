@@ -118,13 +118,18 @@ export function Navbar() {
     e.preventDefault();
     const targetId = href.replace('#', '');
     
+    // Always close mobile menu if it is open
+    const wasMobileOpen = mobileMenuOpen;
+    if (mobileMenuOpen) {
+      setMobileMenuOpen(false);
+    }
+
     // Dispatch scroll event to notify components and lock scrollspy
     window.dispatchEvent(new CustomEvent('scroll-to-section', { detail: { targetId } }));
 
     const element = document.getElementById(targetId);
     if (element) {
-      if (mobileMenuOpen) {
-        setMobileMenuOpen(false);
+      if (wasMobileOpen) {
         // Wait for mobile menu closing transition to finish (avoiding multi-animation jank)
         setTimeout(() => {
           element.scrollIntoView({ behavior: 'smooth' });
@@ -132,8 +137,9 @@ export function Navbar() {
       } else {
         element.scrollIntoView({ behavior: 'smooth' });
       }
-      window.history.replaceState(null, '', href);
     }
+    
+    window.history.replaceState(null, '', href);
   };
 
   return (
