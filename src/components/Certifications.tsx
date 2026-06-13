@@ -43,10 +43,10 @@ export default function Certifications() {
         {/* Title */}
         <div className="text-center max-w-3xl mx-auto mb-12 space-y-3">
           <h2 className="text-2xl font-bold text-text-dark dark:text-white">
-            International Compliance & Certifications
+            International Compliance
           </h2>
           <p className="text-xs text-text-light dark:text-slate-400 font-light">
-            Ensuring our closures meet global manufacturing quality and food-safe packaging criteria.
+            Ensuring our closures meet global manufacturing quality, official registration, and food-safe packaging criteria.
           </p>
         </div>
 
@@ -80,15 +80,7 @@ export default function Certifications() {
         </div>
 
         {/* Certificate Images Section */}
-        <div className="mt-16 space-y-8">
-          <div className="text-center max-w-2xl mx-auto space-y-2">
-            <h3 className="text-lg font-bold text-text-dark dark:text-white">
-              Official Registration Documents
-            </h3>
-            <p className="text-xs text-text-light dark:text-slate-400 font-light">
-              Verified certifications representing our global manufacturing and compliance quality.
-            </p>
-          </div>
+        <div className="mt-16">
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[

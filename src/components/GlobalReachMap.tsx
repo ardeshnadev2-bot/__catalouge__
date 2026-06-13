@@ -14,7 +14,7 @@ interface ExportCountry {
 
 const exportDestinations: ExportCountry[] = [
   {
-    name: 'India (Manufacturing Origin)',
+    name: 'India',
     coords: { x: 561, y: 184 },
     shippingDays: 'Domestic Hub',
     keyProduct: 'All Products',
@@ -138,7 +138,7 @@ export default function GlobalReachMap() {
             Our Exports & Logistics
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900 dark:text-white">
-            Connecting Rajkot to Global Markets
+            Connecting India to Global Markets
           </h2>
           
           <div className="space-y-4 max-w-3xl mx-auto">
@@ -179,7 +179,7 @@ export default function GlobalReachMap() {
           <div className="absolute top-6 left-6 z-20 flex items-center gap-6 text-xs text-slate-600 dark:text-slate-400 bg-white/95 dark:bg-slate-900/80 backdrop-blur-md px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-800">
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-primary-green animate-ping shrink-0" />
-              <span>Rajkot Origin</span>
+              <span>India Origin</span>
             </div>
             <div className="flex items-center gap-2">
               <span className="w-2.5 h-2.5 rounded-full bg-primary-blue shrink-0" />

@@ -78,7 +78,7 @@ export default function ProductRanges() {
             {/* Image display */}
             <div className="h-64 relative w-full overflow-hidden bg-slate-50 border-t border-slate-200">
               <Image
-                src="/images/products_jerrycans_spouts.png"
+                src="/images/products_jerrycans_spouts_v2.png"
                 alt="Industrial Containers & Spouts"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"
@@ -140,7 +140,7 @@ export default function ProductRanges() {
             {/* Image display */}
             <div className="h-64 relative w-full overflow-hidden bg-slate-50 border-t border-slate-200">
               <Image
-                src="/images/products_caps_closures.png"
+                src="/images/products_caps_closures_v2.png"
                 alt="Precision Caps & Closures"
                 fill
                 className="object-cover transition-transform duration-700 group-hover:scale-105"

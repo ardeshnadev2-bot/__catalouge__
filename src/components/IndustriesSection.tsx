@@ -138,7 +138,7 @@ export default function IndustriesSection() {
         <div className="relative rounded-3xl overflow-hidden glass-card mb-20">
           <div className="relative aspect-[21/9] md:aspect-[21/6] w-full">
             <Image
-              src="/images/industries_banner.png"
+              src="/images/industries_banner_v2.jpg"
               alt="Tailored Closure Solutions"
               fill
               className="object-cover"
@@ -318,13 +318,25 @@ export default function IndustriesSection() {
               <div className="relative aspect-video w-full rounded-xl overflow-hidden bg-slate-950 shadow-inner">
                 <video
                   src="/images/machinery_factory.mp4"
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-cover filter blur-[2px] brightness-50"
                   autoPlay
                   loop
                   muted
                   playsInline
                   controls={false}
                 />
+                {/* Coming Soon Glassmorphic Overlay */}
+                <div className="absolute inset-0 flex flex-col items-center justify-center bg-slate-950/40 backdrop-blur-[4px] z-10 p-4 text-center">
+                  <div className="px-6 py-2.5 rounded-full bg-gradient-to-r from-orange-500/20 to-amber-500/20 border border-orange-500/30 text-xs sm:text-sm font-bold tracking-widest text-orange-400 uppercase shadow-lg shadow-orange-500/10 animate-pulse">
+                    Coming Soon
+                  </div>
+                  <h3 className="mt-4 text-xl sm:text-2xl font-extrabold text-white tracking-wide drop-shadow-md">
+                    Virtual Factory Tour
+                  </h3>
+                  <p className="mt-2 text-xs sm:text-sm text-slate-300 max-w-md font-light leading-relaxed">
+                    Interactive micrometer precision machinery and automated molding operations catalog.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
